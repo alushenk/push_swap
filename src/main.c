@@ -6,11 +6,12 @@ int main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		stack = parse_parameters(argc - 1, argv[1]);
+		stack = parse_parameters(argc, argv);
 		if (stack == NULL)
-			printf("error");
+			ft_putstr("error");
+		display_stack(stack);
 	}
-
-	printf("Hello, World!\n");
+	else
+		ft_putstr("pass the parameters, please");
 	return 0;
 }

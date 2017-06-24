@@ -8,10 +8,12 @@
 #include "../externals/libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+# include <limits.h>
 
 typedef struct	s_elem
 {
 	int value;
+	int portion_index;
 	struct s_elem *up;
 	struct s_elem *down;
 }				t_elem;
@@ -19,18 +21,22 @@ typedef struct	s_elem
 
 typedef struct	s_stack
 {
-	t_elem *start;
-	t_elem *end;
+	t_elem *x;
 	size_t length;
 }				t_stack;
 
 /*
 ** parsing.c
 */
-t_list *parse_parameters(int len, char *arguments);
+t_stack *parse_parameters(int len, char **argv);
 /*
 ** stack_operations.c
 */
 void	push_back(t_stack *stack, t_elem *elem);
+void	rotate_up(t_stack *stack);
+/*
+** display.c
+*/
+void	display_stack(t_stack *stack);
 
 #endif //PUSH_SWAP_PUSH_SWAP_H
