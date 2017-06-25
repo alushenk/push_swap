@@ -38,5 +38,11 @@ void	rotate_up(t_stack *stack);
 ** display.c
 */
 void	display_stack(t_stack *stack);
+/*
+** errors.c
+*/
+void    error_wrong_arguments();
+void    error_duplicates();
+void    error_no_arguments();
 
 #endif //PUSH_SWAP_PUSH_SWAP_H

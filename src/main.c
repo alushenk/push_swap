@@ -7,11 +7,9 @@ int main(int argc, char **argv)
 	if (argc > 1)
 	{
 		stack = parse_parameters(argc, argv);
-		if (stack == NULL)
-			ft_putstr("error");
 		display_stack(stack);
 	}
 	else
-		ft_putstr("pass the parameters, please");
+		error_no_arguments();
 	return 0;
 }

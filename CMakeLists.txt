@@ -4,7 +4,7 @@ project(push_swap)
 set(CMAKE_C_STANDARD 99)
 
 file(GLOB SOURCE_FILES src/*.c)
-add_executable(push_swap ${SOURCE_FILES})
+add_executable(push_swap ${SOURCE_FILES} src/errors.c)
 
 file(GLOB SOURCES_LIB externals/libft/*.c)
 add_library(ft STATIC ${SOURCES_LIB})       # Создание статической библиотеки с именем libft

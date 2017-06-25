@@ -5,28 +5,9 @@
 #include "push_swap.h"
 
 /*
-** returning zero: not int, > int_max
+** function can terminate the program in case of errors
 */
-int		skip_atoi(char **s, int *result)
-{
-	size_t i;
-
-	i = 0;
-	while (ft_isdigit(**s))
-	{
-		i = i * 10 + *((*s)++) - '0';
-		if (i > INT_MAX)
-			return (0);
-	}
-	while(ft_isspace(**s))
-		(*s)++;
-	if (**s != '\0' && ft_isdigit(**s) == 0)
-		return (0);
-	*result = i;
-	return (1);
-}
-
-int	err_atoi(const char *str, int *err)
+int	err_atoi(const char *str)
 {
 	int	result;
 	int	sign;
@@ -37,15 +18,15 @@ int	err_atoi(const char *str, int *err)
 		sign = -1;
 	if (*str == '-' || *str == '+')
 		str++;
-	while (*str <= '9' && *str >= '0')
+	while (ft_isdigit(*str))
 	{
 		result = result * 10 + (*str - '0');
+		if (result > INT_MAX || (result > -INT_MIN && sign == -1))
+			error_wrong_arguments();
 		str++;
 	}
 	if (*str != '\0' && ft_isdigit(*str) == 0)
-		*err = 1;
-	else
-		*err = 0;
+		error_wrong_arguments();
 	return result * sign;
 }
 
@@ -55,25 +36,16 @@ t_stack *parse_parameters(int len, char **argv)
 	int num;
 	t_stack *result;
 	t_elem *elem;
-	int err;
 
 	// create stack
 	result = (t_stack*)malloc(sizeof(t_stack));
 	result->x = NULL;
 	result->length = 0;
 
-	num = 0;
-	err = 0;
 	i = 1;
-	// tut dopilit
 	while (i < len)
 	{
-		num = err_atoi(argv[i], &err);
-		if (err_atoi(argv[i], &num) == 0)
-		{
-			printf("error");
-			return NULL;
-		}
+		num = err_atoi(argv[i]);
 		// create element
 		elem = (t_elem*)malloc(sizeof(t_elem));
 		elem->up = NULL;
