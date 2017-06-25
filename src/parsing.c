@@ -5,7 +5,7 @@
 #include "push_swap.h"
 
 /*
-** function can terminate the program in case of errors
+** function terminates the program in case of wrong parameters
 */
 int	err_atoi(const char *str)
 {
@@ -30,6 +30,23 @@ int	err_atoi(const char *str)
 	return result * sign;
 }
 
+/*
+** Function terminates the program in the case of repeated values
+*/
+void	find_duplicates(t_stack *stack, int num)
+{
+	int i;
+
+	i = 0;
+	while (i < stack->length)
+	{
+		if (stack->x->value == num)
+			error_duplicates();
+		rotate_up(stack);
+		i++;
+	}
+}
+
 t_stack *parse_parameters(int len, char **argv)
 {
 	int i;
@@ -37,7 +54,9 @@ t_stack *parse_parameters(int len, char **argv)
 	t_stack *result;
 	t_elem *elem;
 
-	// create stack
+	/*
+	** creating stack
+	*/
 	result = (t_stack*)malloc(sizeof(t_stack));
 	result->x = NULL;
 	result->length = 0;
@@ -45,15 +64,22 @@ t_stack *parse_parameters(int len, char **argv)
 	i = 1;
 	while (i < len)
 	{
+		/*
+		** converting string parameters to int
+		*/
 		num = err_atoi(argv[i]);
-		// create element
+		/*
+		** checking for duplicates in stack
+		*/
+		find_duplicates(result, num);
+		/*
+		** creating stack element
+		*/
 		elem = (t_elem*)malloc(sizeof(t_elem));
 		elem->up = NULL;
 		elem->down = NULL;
 		elem->value = num;
 		elem->portion_index = 0;
-
-		//check: if element in stack ERROR
 
 		push_back(result, elem);
 		i++;
