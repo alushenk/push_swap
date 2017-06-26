@@ -13,7 +13,7 @@
 typedef struct	s_elem
 {
 	int value;
-	int portion_index;
+	int group;
 	struct s_elem *up;
 	struct s_elem *down;
 }				t_elem;

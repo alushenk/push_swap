@@ -67,7 +67,7 @@ t_elem *create_element(int value)
 	result->up = NULL;
 	result->down = NULL;
 	result->value = value;
-	result->portion_index = 0;
+	result->group = 0;
 
 	return result;
 }
