@@ -4,6 +4,20 @@
 
 #include "push_swap.h"
 
+void	rotate_up(t_stack *stack)
+{
+	if (stack->length == 0)
+		return ;
+	stack->x = stack->x->down;
+}
+
+void	rotate_down(t_stack *stack)
+{
+	if (stack->length == 0)
+		return ;
+	stack->x = stack->x->up;
+}
+
 t_elem	*pop(t_stack *stack)
 {
 	t_elem *elem;
@@ -31,6 +45,19 @@ t_elem	*peek(t_stack *stack)
 
 	result = create_element(stack->x->value);
 	return result;
+}
+
+/*
+** swaps first two elements of stack
+*/
+void	swap(t_stack *stack)
+{
+	t_elem *elem;
+
+	elem = pop(stack);
+	rotate_up(stack);
+	push(stack, elem);
+	rotate_down(stack);
 }
 
 t_stack	*create_stack()
@@ -91,13 +118,6 @@ void 	push(t_stack *stack, t_elem *elem)
 	stack->x->up = elem;
 	stack->x = elem;
 	stack->length += 1;
-}
-
-void	rotate_up(t_stack *stack)
-{
-	if (stack->length == 0)
-		return ;
-	stack->x = stack->x->down;
 }
 
 void	push_back(t_stack *stack, t_elem *elem)
