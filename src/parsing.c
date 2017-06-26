@@ -54,33 +54,14 @@ t_stack *parse_parameters(int len, char **argv)
 	t_stack *result;
 	t_elem *elem;
 
-	/*
-	** creating stack
-	*/
-	result = (t_stack*)malloc(sizeof(t_stack));
-	result->x = NULL;
-	result->length = 0;
+	result = create_stack();
 
 	i = 1;
 	while (i < len)
 	{
-		/*
-		** converting string parameters to int
-		*/
 		num = err_atoi(argv[i]);
-		/*
-		** checking for duplicates in stack
-		*/
 		find_duplicates(result, num);
-		/*
-		** creating stack element
-		*/
-		elem = (t_elem*)malloc(sizeof(t_elem));
-		elem->up = NULL;
-		elem->down = NULL;
-		elem->value = num;
-		elem->portion_index = 0;
-
+		elem = create_element(num);
 		push_back(result, elem);
 		i++;
 	}

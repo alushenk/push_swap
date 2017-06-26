@@ -32,17 +32,29 @@ t_stack *parse_parameters(int len, char **argv);
 /*
 ** stack_operations.c
 */
+void 	push(t_stack *stack, t_elem *elem);
 void	push_back(t_stack *stack, t_elem *elem);
 void	rotate_up(t_stack *stack);
+t_stack	*create_stack();
+t_elem *create_element(int value);
+void	replace(t_stack *a, t_stack *b);
+t_elem	*pop(t_stack *stack);
+t_stack	*copy_stack(t_stack *stack);
 /*
 ** display.c
 */
 void	display_stack(t_stack *stack);
+void	display_array(int *array, int len);
 /*
 ** errors.c
 */
 void    error_wrong_arguments();
 void    error_duplicates();
 void    error_no_arguments();
+/*
+** simple_sorting.c
+*/
+t_stack		*insertion_sort(t_stack *stack_to_sort);
+int 	*create_array(t_stack *stack);
 
 #endif //PUSH_SWAP_PUSH_SWAP_H

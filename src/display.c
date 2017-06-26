@@ -17,3 +17,16 @@ void	display_stack(t_stack *stack)
 		i++;
 	}
 }
+
+void	display_array(int *array, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		ft_putnbr(array[i]);
+		ft_putchar('\n');
+		i++;
+	}
+}
