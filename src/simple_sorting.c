@@ -39,7 +39,7 @@ int 	*create_array(t_stack *stack)
 
 t_stack		*insertion_sort(t_stack *stack_to_sort)
 {
-	int min;
+	//int min;
 	int i;
 	t_stack *sorted_stack;
 	t_stack *stack;
@@ -55,7 +55,7 @@ t_stack		*insertion_sort(t_stack *stack_to_sort)
 			rotate_up(sorted_stack);
 			i++;
 		}
-		// kind of stupid insertion
+		// spin list to start position
 		replace(stack, sorted_stack);
 		while (i < sorted_stack->length)
 		{
@@ -64,9 +64,9 @@ t_stack		*insertion_sort(t_stack *stack_to_sort)
 		}
 	}
 
-	min = find_min(sorted_stack);
-	while (sorted_stack->x->value != min)
-		rotate_up(sorted_stack);
+	//min = find_min(sorted_stack);
+	//while (sorted_stack->x->value != min)
+	//	rotate_up(sorted_stack);
 
 	return sorted_stack;
 }

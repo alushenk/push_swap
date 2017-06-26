@@ -22,7 +22,7 @@ typedef struct	s_elem
 typedef struct	s_stack
 {
 	t_elem *x;
-	size_t length;
+	int length;
 }				t_stack;
 
 /*
@@ -45,6 +45,7 @@ t_stack	*copy_stack(t_stack *stack);
 */
 void	display_stack(t_stack *stack);
 void	display_array(int *array, int len);
+void	display_both(t_stack *a, t_stack *b);
 /*
 ** errors.c
 */
@@ -56,5 +57,9 @@ void    error_no_arguments();
 */
 t_stack		*insertion_sort(t_stack *stack_to_sort);
 int 	*create_array(t_stack *stack);
+/*
+** algorithm.c
+*/
+t_stack		*quicksort(t_stack *stack, int *sorted_array);
 
 #endif //PUSH_SWAP_PUSH_SWAP_H

@@ -30,3 +30,26 @@ void	display_array(int *array, int len)
 		i++;
 	}
 }
+
+void	display_both(t_stack *a, t_stack *b)
+{
+	int i;
+
+	i = 0;
+	while (i < a->length || i < b->length)
+	{
+		if (i < a->length)
+		{
+			ft_putnbr(a->x->value);
+			rotate_up(a);
+		}
+		ft_putchar('\t');
+		if (i < b->length)
+		{
+			ft_putnbr(b->x->value);
+			rotate_up(b);
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}
