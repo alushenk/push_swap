@@ -35,6 +35,7 @@ t_stack *parse_parameters(int len, char **argv);
 void 	push(t_stack *stack, t_elem *elem);
 void	push_back(t_stack *stack, t_elem *elem);
 void	rotate_up(t_stack *stack);
+void	rotate_down(t_stack *stack);
 t_stack	*create_stack();
 t_elem *create_element(int value);
 void	replace(t_stack *a, t_stack *b);

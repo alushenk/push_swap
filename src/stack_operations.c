@@ -49,6 +49,9 @@ t_elem	*peek(t_stack *stack)
 
 /*
 ** swaps first two elements of stack
+ *
+ * it uses the rotate functions twice, for simplicity,
+ * that must be considered as one operation
 */
 void	swap(t_stack *stack)
 {

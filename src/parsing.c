@@ -9,7 +9,7 @@
 */
 int	err_atoi(const char *str)
 {
-	int	result;
+	size_t	result;
 	int	sign;
 
 	result = 0;
@@ -27,7 +27,7 @@ int	err_atoi(const char *str)
 	}
 	if (*str != '\0' && ft_isdigit(*str) == 0)
 		error_wrong_arguments();
-	return result * sign;
+	return (int)result * sign;
 }
 
 /*
