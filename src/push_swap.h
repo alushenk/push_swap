@@ -31,6 +31,20 @@ typedef struct	s_array
 	int length;
 }				t_array;
 
+typedef struct	s_instruction
+{
+	char *name;
+	struct s_instruction *next;
+}				t_instruction;
+
+typedef struct	s_instructions
+{
+	t_instruction *x;
+	int length;
+}				t_instructions;
+
+t_instructions	*g_instructions;
+
 /*
 ** parsing.c
 */

@@ -7,6 +7,9 @@ int main(int argc, char **argv)
 	t_stack *sorted_stack;
 	t_array *sorted_array;
 
+	g_instructions = (t_instructions*)malloc(sizeof(t_instructions));
+	g_instructions->length = 0;
+
 	if (argc > 1)
 	{
 		stack = parse_parameters(argc, argv);
