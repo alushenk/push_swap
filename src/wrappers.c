@@ -47,7 +47,7 @@ void pa(t_stack *stack, t_elem *elem)
 	add_instruction("pa");
 }
 
-void pb(t_stack *stack)
+void pb(t_stack *stack, t_elem *elem)
 {
 	push(stack, elem);
 	add_instruction("pb");

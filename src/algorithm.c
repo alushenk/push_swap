@@ -62,6 +62,10 @@ void		split(t_stack *a, t_stack *b, t_array *sorted_array, int length_a, int len
 	if (length_a <= 3)
 	{
 		sort_a(a, length_a);
+		if (length_b <= 3)
+			sort_a(b, length_b);
+		else
+			split(b, a, sorted_array, group_length, length_a, 1);
 		return;
 	}
 
