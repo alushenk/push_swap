@@ -21,3 +21,9 @@ void    error_no_arguments()
     ft_putstr("Error! No arguments found\n");
     exit(0);
 }
+
+void	error_memory_allocation()
+{
+	ft_putstr("Error! Cannot allocate memory\n");
+	exit(0);
+}

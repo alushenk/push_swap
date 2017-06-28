@@ -21,25 +21,28 @@ int find_min(t_stack *stack)
 	return result;
 }
 
-int 	*create_array(t_stack *stack)
+t_array 	*create_array(t_stack *stack)
 {
-	int *result;
+	t_array *result;
+	int *array;
 	int i;
 
-	result = (int*)malloc(sizeof(int) * stack->length);
+	result = (t_array*)malloc(sizeof(t_array));
+	array = (int*)malloc(sizeof(int) * stack->length);
 	i = 0;
 	while (i < stack->length)
 	{
-		result[i] = stack->x->value;
+		array[i] = stack->x->value;
 		rotate_up(stack);
 		i++;
 	}
+	result->array = array;
+	result->length = stack->length;
 	return result;
 }
 
 t_stack		*insertion_sort(t_stack *stack_to_sort)
 {
-	//int min;
 	int i;
 	t_stack *sorted_stack;
 	t_stack *stack;
@@ -63,10 +66,6 @@ t_stack		*insertion_sort(t_stack *stack_to_sort)
 			i++;
 		}
 	}
-
-	//min = find_min(sorted_stack);
-	//while (sorted_stack->x->value != min)
-	//	rotate_up(sorted_stack);
-
+	free(stack);
 	return sorted_stack;
 }

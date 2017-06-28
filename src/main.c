@@ -3,8 +3,9 @@
 int main(int argc, char **argv)
 {
 	t_stack *stack;
+	t_stack *buffer;
 	t_stack *sorted_stack;
-	int 	*sorted_array;
+	t_array *sorted_array;
 
 	if (argc > 1)
 	{
@@ -15,11 +16,14 @@ int main(int argc, char **argv)
 
 		sorted_stack = insertion_sort(stack);
 		sorted_array = create_array(sorted_stack);
-		display_array(sorted_array, sorted_stack->length);
+		display_array(sorted_array);
 
 		ft_putchar('\n');
 
-		quicksort(stack, sorted_array);
+		buffer = create_stack();
+		quicksort(stack, buffer, sorted_array);
+
+		display_both(stack, buffer);
 	}
 	else
 		error_no_arguments();

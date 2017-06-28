@@ -18,14 +18,14 @@ void	display_stack(t_stack *stack)
 	}
 }
 
-void	display_array(int *array, int len)
+void	display_array(t_array *array)
 {
 	int i;
 
 	i = 0;
-	while (i < len)
+	while (i < array->length)
 	{
-		ft_putnbr(array[i]);
+		ft_putnbr(array->array[i]);
 		ft_putchar('\n');
 		i++;
 	}

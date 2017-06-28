@@ -25,6 +25,12 @@ typedef struct	s_stack
 	int length;
 }				t_stack;
 
+typedef struct	s_array
+{
+	int *array;
+	int length;
+}				t_array;
+
 /*
 ** parsing.c
 */
@@ -46,7 +52,7 @@ void	swap(t_stack *stack);
 ** display.c
 */
 void	display_stack(t_stack *stack);
-void	display_array(int *array, int len);
+void	display_array(t_array *array);
 void	display_both(t_stack *a, t_stack *b);
 /*
 ** errors.c
@@ -54,14 +60,30 @@ void	display_both(t_stack *a, t_stack *b);
 void    error_wrong_arguments();
 void    error_duplicates();
 void    error_no_arguments();
+void	error_memory_allocation();
 /*
 ** simple_sorting.c
 */
 t_stack		*insertion_sort(t_stack *stack_to_sort);
-int 	*create_array(t_stack *stack);
+t_array 	*create_array(t_stack *stack);
 /*
 ** algorithm.c
 */
-t_stack		*quicksort(t_stack *stack, int *sorted_array);
+t_stack		*quicksort(t_stack *stack, t_stack *buffer, t_array *sorted_array);
+/*
+** cases.c
+*/
+void 		case_0(t_stack *stack);
+void 		case_1(t_stack *stack);
+void 		case_2(t_stack *stack);
+void 		case_3(t_stack *stack);
+void 		case_4(t_stack *stack);
+/*
+** three_two_sortings.c
+*/
+void		sort_two_ascending(t_stack *stack);
+void		sort_two_descending(t_stack *stack);
+void		sort_three_ascending(t_stack *stack);
+void		sort_three_descending(t_stack *stack);
 
 #endif //PUSH_SWAP_PUSH_SWAP_H
