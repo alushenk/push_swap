@@ -47,8 +47,6 @@ void	display_both(t_stack *a, t_stack *b)
 		if (i < b->length)
 		{
 			ft_putnbr(b->x->value);
-			ft_putchar('\t');
-			ft_putnbr(b->x->group);
 			rotate_up(b);
 		}
 		ft_putchar('\n');

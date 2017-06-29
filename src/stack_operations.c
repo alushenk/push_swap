@@ -97,7 +97,7 @@ t_elem *create_element(int value)
 	result->up = NULL;
 	result->down = NULL;
 	result->value = value;
-	result->group = 0;
+	result->group_length = 0;
 
 	return result;
 }

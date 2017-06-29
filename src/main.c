@@ -13,6 +13,10 @@ int main(int argc, char **argv)
 	if (argc > 1)
 	{
 		stack = parse_parameters(argc, argv);
+
+		// the first group
+		stack->x->group_length = stack->length;
+
 		display_stack(stack);
 
 		ft_putchar('\n');
