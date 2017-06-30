@@ -20,6 +20,7 @@ void	add_instruction(char *name)
 	instruction = create_instruction(name);
 	instruction->next = g_instructions->x;
 	g_instructions->x = instruction;
+	g_instructions->length += 1;
 }
 
 void sa(t_stack *stack)
@@ -41,15 +42,15 @@ void ss(t_stack *a, t_stack *b)
 	add_instruction("ss");
 }
 
-void pa(t_stack *stack, t_elem *elem)
+void pa(t_stack *a, t_stack *b)
 {
-	push(stack, elem);
+	replace(b, a);
 	add_instruction("pa");
 }
 
-void pb(t_stack *stack, t_elem *elem)
+void pb(t_stack *a, t_stack *b)
 {
-	push(stack, elem);
+	replace(a, b);
 	add_instruction("pb");
 }
 

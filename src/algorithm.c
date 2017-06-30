@@ -4,8 +4,6 @@
 
 #include "push_swap.h"
 
-
-
 // sorting in ascending order
 void		sort_a(t_stack *stack, int length)
 {
@@ -16,39 +14,13 @@ void		sort_a(t_stack *stack, int length)
 }
 
 // sorting in descending order
-void 		sort_b(t_stack *stack, int length)
-{
-	if (length == 2)
-		sort_two_descending(stack);
-	else if (length == 3)
-		sort_three_descending(stack);
-}
-
-//int			get_group_length(t_stack *stack)
+//void 		sort_b(t_stack *stack, int length)
 //{
-//	int len;
-//	int group;
-//	t_elem *temp;
-//
-//	group = stack->x->group;
-//	len = 0;
-//	temp = stack->x;
-//	while (temp->group == group && len < stack->length)
-//	{
-//		len += 1;
-//		temp = temp->down;
-//	}
-//	return len;
+//	if (length == 2)
+//		sort_two_descending(stack);
+//	else if (length == 3)
+//		sort_three_descending(stack);
 //}
-
-int 		find_median(t_array *sorted_array, int start, int len)
-{
-	int median;
-
-	median = sorted_array->array[start - len / 2];
-
-	return median;
-}
 
 void		split_smaller(t_stack *a, t_stack *b, int median, int length)
 {
@@ -64,13 +36,13 @@ void		split_smaller(t_stack *a, t_stack *b, int median, int length)
 	{
 		if (a->x->value < median)
 		{
-			replace(a, b);
+			pb(a, b);
 			length -= 1;
 			group_length += 1;
 		}
 		else
 		{
-			rotate_up(a);
+			ra(a);
 			displacement += 1;
 			i++;
 		}
@@ -78,7 +50,7 @@ void		split_smaller(t_stack *a, t_stack *b, int median, int length)
 	i = 0;
 	while (i < displacement)
 	{
-		rotate_down(a);
+		rra(a);
 		i++;
 	}
 	b->x->group_length = group_length;
@@ -99,13 +71,13 @@ void		split_bigger(t_stack *a, t_stack *b, int median, int length)
 	{
 		if (b->x->value >= median)
 		{
-			replace(b, a);
+			pa(a, b);
 			length -= 1;
 			group_length += 1;
 		}
 		else
 		{
-			rotate_up(b);
+			ra(b);
 			displacement += 1;
 			i++;
 		}
@@ -113,7 +85,7 @@ void		split_bigger(t_stack *a, t_stack *b, int median, int length)
 	i = 0;
 	while (i < displacement)
 	{
-		rotate_down(b);
+		rra(b);
 		i++;
 	}
 	b->x->group_length = displacement;
@@ -127,7 +99,7 @@ void		replace_group(t_stack *a, t_stack *b, int group_length)
 	i = 0;
 	while (i < group_length)
 	{
-		replace(a, b);
+		pb(a, b);
 		i++;
 	}
 	b->x->group_length = group_length;
@@ -137,30 +109,38 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 {
 	int median;
 
-	display_both(a, b);
-	ft_putchar('\n');
-	sort_a(a, a->x->group_length);
-	// тут крашится когда b уже пустой
-	if (b->x->group_length <= 3)
+	while (1)
 	{
-		replace_group(b, a, b->x->group_length);
-		loop(a, b, sorted_array);
+		sort_a(a, a->x->group_length);
+		display_both(a, b);
+		ft_putchar('\n');
+
+		if (b->x == NULL)
+			break;
+		if (b->x->group_length <= 3)
+		{
+			replace_group(b, a, b->x->group_length);
+			continue;
+		}
+
+		median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
+		split_bigger(a, b, median, b->x->group_length);
+
+		display_both(a, b);
+		ft_putchar('\n');
+
+		if (a->x->group_length <= 3 && b->length > 0)
+			continue;
+		else
+		{
+			while (a->x->group_length > 3)
+			{
+				median = sorted_array->array[sorted_array->length - a->length + a->x->group_length / 2];
+				split_smaller(a, b, median, a->x->group_length);
+			}
+			continue;
+		}
 	}
-
-	median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
-	split_bigger(a, b, median, b->x->group_length);
-	display_both(a, b);
-	ft_putchar('\n');
-
-	while (a->x->group_length > 3)
-	{
-		median = sorted_array->array[sorted_array->length - a->length + a->x->group_length / 2];
-		split_bigger(b, a, median, a->x->group_length);
-	}
-
-
-	if (a->x->group_length <= 3)
-		loop(a, b, sorted_array);
 }
 
 t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
@@ -175,9 +155,8 @@ t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
 		ft_putchar('\n');
 	}
 	a->x->group_length = a->length;
+	sort_a(a, a->x->group_length);
 	loop(a, b, sorted_array);
-
-
 
 	return NULL;
 }

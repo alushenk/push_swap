@@ -99,5 +99,21 @@ void		sort_two_ascending(t_stack *stack);
 void		sort_two_descending(t_stack *stack);
 void		sort_three_ascending(t_stack *stack);
 void		sort_three_descending(t_stack *stack);
+/*
+** wrappers.c
+*/
+t_instruction	*create_instruction(char *name);
+void			add_instruction(char *name);
+void sa(t_stack *stack);
+void sb(t_stack *stack);
+void ss(t_stack *a, t_stack *b);
+void pa(t_stack *a, t_stack *b);
+void pb(t_stack *a, t_stack *b);
+void ra(t_stack *stack);
+void rb(t_stack *stack);
+void rr(t_stack *a, t_stack *b);
+void rra(t_stack *stack);
+void rrb(t_stack *stack);
+void rrr(t_stack *a, t_stack *b);
 
 #endif //PUSH_SWAP_PUSH_SWAP_H

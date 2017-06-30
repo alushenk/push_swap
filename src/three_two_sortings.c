@@ -14,7 +14,7 @@ void		sort_two_ascending(t_stack *stack)
 	two = stack->x->down->value;
 
 	if (one > two)
-		swap(stack);
+		sa(stack);
 }
 
 // sorts top two elements of stack
@@ -27,7 +27,7 @@ void		sort_two_descending(t_stack *stack)
 	two = stack->x->down->value;
 
 	if (one < two)
-		swap(stack);
+		sb(stack);
 }
 
 // sorts top three elements of stack

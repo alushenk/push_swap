@@ -31,6 +31,9 @@ int main(int argc, char **argv)
 		quicksort(stack, buffer, sorted_array);
 
 		display_both(stack, buffer);
+
+		ft_putchar('\n');
+		ft_putnbr(g_instructions->length);
 	}
 	else
 		error_no_arguments();

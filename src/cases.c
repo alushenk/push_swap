@@ -6,37 +6,37 @@
 
 void 		case_0(t_stack *stack)
 {
-	swap(stack);
-	rotate_up(stack);
-	swap(stack);
-	rotate_down(stack);
-	swap(stack);
+	sa(stack);
+	ra(stack);
+	sa(stack);
+	rra(stack);
+	sa(stack);
 }
 
 void		case_1(t_stack *stack)
 {
-	swap(stack);
-	rotate_up(stack);
-	swap(stack);
-	rotate_down(stack);
+	sa(stack);
+	ra(stack);
+	sa(stack);
+	rra(stack);
 }
 
 void 		case_2(t_stack *stack)
 {
-	rotate_up(stack);
-	swap(stack);
-	rotate_down(stack);
-	swap(stack);
+	ra(stack);
+	sa(stack);
+	rra(stack);
+	sa(stack);
 }
 
 void		case_3(t_stack *stack)
 {
-	swap(stack);
+	sa(stack);
 }
 
 void		case_4(t_stack *stack)
 {
-	rotate_up(stack);
-	swap(stack);
-	rotate_down(stack);
+	ra(stack);
+	sa(stack);
+	rra(stack);
 }
