@@ -18,6 +18,22 @@ void	display_stack(t_stack *stack)
 	}
 }
 
+void	display_instructions(t_instructions *stack)
+{
+	size_t i;
+	t_instruction *elem;
+
+	elem = stack->x;
+	i = 0;
+	while (i < stack->length)
+	{
+		ft_putstr(elem->name);
+		ft_putchar('\n');
+		elem = elem->next;
+		i++;
+	}
+}
+
 void	display_array(t_array *array)
 {
 	int i;

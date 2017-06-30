@@ -34,6 +34,10 @@ int main(int argc, char **argv)
 
 		ft_putchar('\n');
 		ft_putnbr(g_instructions->length);
+		ft_putchar('\n');
+		ft_putchar('\n');
+
+		//display_instructions(g_instructions);
 	}
 	else
 		error_no_arguments();

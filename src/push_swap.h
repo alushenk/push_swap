@@ -66,6 +66,7 @@ void	swap(t_stack *stack);
 ** display.c
 */
 void	display_stack(t_stack *stack);
+void	display_instructions(t_instructions *stack);
 void	display_array(t_array *array);
 void	display_both(t_stack *a, t_stack *b);
 /*
