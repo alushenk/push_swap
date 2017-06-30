@@ -11,6 +11,7 @@ void 		case_0(t_stack *stack)
 	sa(stack);
 	rra(stack);
 	sa(stack);
+	//g_instructions->length -= 2;
 }
 
 void		case_1(t_stack *stack)

@@ -35,6 +35,7 @@ typedef struct	s_instruction
 {
 	char *name;
 	struct s_instruction *next;
+	struct s_instruction *prev;
 }				t_instruction;
 
 typedef struct	s_instructions
@@ -103,6 +104,7 @@ void		sort_three_descending(t_stack *stack);
 /*
 ** wrappers.c
 */
+t_instructions	*create_list();
 t_instruction	*create_instruction(char *name);
 void			add_instruction(char *name);
 void sa(t_stack *stack);
