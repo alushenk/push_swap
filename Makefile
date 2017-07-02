@@ -2,16 +2,24 @@ NAME = checker
 
 SRCDIR = src
 
-SRC =   checker.c \
-        wrappers.c \
+GNLDIR = externals/get_next_line
+
+CHECKER_DIR = checker_files
+
+SRC =   wrappers.c \
         stack_operations.c \
         errors.c \
-        parsing.c
+        parsing.c \
+        simple_sorting.c \
+        display.c
 
+GNL =	get_next_line.c
 
-OBJ = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
+CHECKER = main.c
 
-LIB_PATH = externals/libft
+OBJ = $(addprefix $(SRCDIR)/, $(SRC:.c=.o)) $(addprefix $(GNLDIR)/, $(GNL:.c=.o)) $(addprefix $(CHECKER_DIR)/, $(CHECKER:.c=.o))
+
+LIB_PATH = $(GNLDIR)/libft
 
 all: $(NAME)
 

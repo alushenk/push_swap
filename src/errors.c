@@ -27,3 +27,9 @@ void	error_memory_allocation()
 	ft_putstr("Error! Cannot allocate memory\n");
 	exit(0);
 }
+
+void	error_sorting()
+{
+	ft_putstr("KO!\n");
+	exit(0);
+}

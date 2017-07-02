@@ -28,7 +28,8 @@ void	display_instructions(t_instructions *stack)
 	while (i < stack->length)
 	{
 		ft_putstr(elem->name);
-		ft_putchar('\n');
+		if (i + 1 != stack->length)
+			ft_putchar('\n');
 		elem = elem->next;
 		i++;
 	}
@@ -36,7 +37,7 @@ void	display_instructions(t_instructions *stack)
 
 void	display_array(t_array *array)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (i < array->length)
@@ -49,7 +50,7 @@ void	display_array(t_array *array)
 
 void	display_both(t_stack *a, t_stack *b)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (i < a->length || i < b->length)

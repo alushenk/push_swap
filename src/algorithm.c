@@ -158,8 +158,8 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 	while (1)
 	{
 		sort_a(a, a->x->group_length);
-		display_both(a, b);
-		ft_putchar('\n');
+		//display_both(a, b);
+		//ft_putchar('\n');
 
 		if (b->x == NULL)
 			break;
@@ -172,8 +172,8 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 		median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
 		split_bigger(a, b, median, b->x->group_length);
 
-		display_both(a, b);
-		ft_putchar('\n');
+		//display_both(a, b);
+		//ft_putchar('\n');
 
 		if (a->x->group_length <= 3 && b->length > 0)
 			continue;
@@ -197,8 +197,8 @@ t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
 	{
 		median = sorted_array->array[sorted_array->length - a->length / 2];
 		split_smaller(a, b, median, a->length);
-		display_both(a, b);
-		ft_putchar('\n');
+		//display_both(a, b);
+		//ft_putchar('\n');
 	}
 	a->x->group_length = a->length;
 	loop(a, b, sorted_array);

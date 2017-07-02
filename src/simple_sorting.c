@@ -7,7 +7,7 @@
 int find_min(t_stack *stack)
 {
 	int result;
-	int i;
+	size_t i;
 
 	i = 0;
 	result = stack->x->value;
@@ -25,7 +25,7 @@ t_array 	*create_array(t_stack *stack)
 {
 	t_array *result;
 	int *array;
-	int i;
+	size_t i;
 
 	result = (t_array*)malloc(sizeof(t_array));
 	array = (int*)malloc(sizeof(int) * stack->length);
@@ -43,7 +43,7 @@ t_array 	*create_array(t_stack *stack)
 
 t_stack		*insertion_sort(t_stack *stack_to_sort)
 {
-	int i;
+	size_t i;
 	t_stack *sorted_stack;
 	t_stack *stack;
 

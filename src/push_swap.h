@@ -13,22 +13,21 @@
 typedef struct	s_elem
 {
 	int value;
-	int group_length;
+	size_t group_length;
 	struct s_elem *up;
 	struct s_elem *down;
 }				t_elem;
 
-
 typedef struct	s_stack
 {
 	t_elem *x;
-	int length;
+	size_t length;
 }				t_stack;
 
 typedef struct	s_array
 {
 	int *array;
-	int length;
+	size_t length;
 }				t_array;
 
 typedef struct	s_instruction
@@ -41,7 +40,7 @@ typedef struct	s_instruction
 typedef struct	s_instructions
 {
 	t_instruction *x;
-	int length;
+	size_t length;
 }				t_instructions;
 
 t_instructions	*g_instructions;
@@ -78,6 +77,7 @@ void    error_wrong_arguments();
 void    error_duplicates();
 void    error_no_arguments();
 void	error_memory_allocation();
+void	error_sorting();
 /*
 ** simple_sorting.c
 */

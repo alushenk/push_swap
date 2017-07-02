@@ -10,3 +10,19 @@ file(GLOB SOURCES_LIB externals/get_next_line/libft/*.c)
 add_library(ft STATIC ${SOURCES_LIB})       # Создание статической библиотеки с именем libft
 
 target_link_libraries(push_swap ft)	        # Линковка программы с библиотекой
+
+
+project(checker)
+set(CMAKE_C_STANDARD 99)
+
+add_executable(checker
+        checker_files/main.c
+        externals/get_next_line/get_next_line.c
+        src/wrappers.c
+        src/stack_operations.c
+        src/errors.c src/parsing.c
+        src/simple_sorting.c
+        src/display.c
+        )
+
+target_link_libraries(checker ft)	        # Линковка программы с библиотекой
