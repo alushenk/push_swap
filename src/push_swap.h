@@ -5,7 +5,6 @@
 #ifndef PUSH_SWAP_PUSH_SWAP_H
 #define PUSH_SWAP_PUSH_SWAP_H
 
-#include "../externals/libft/libft.h"
 #include "../externals/get_next_line/get_next_line.h"
 #include <stdio.h>
 #include <stdlib.h>
