@@ -25,7 +25,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C $(LIB_PATH)
-	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(LIB_PATH)/libft.a
+	gcc -g -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(LIB_PATH)/libft.a
 
 %.o: %.c
 	gcc -c -Wall -Wextra -Werror -o $@ $<

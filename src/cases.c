@@ -20,6 +20,7 @@ void		case_1(t_stack *stack)
 	ra(stack);
 	sa(stack);
 	rra(stack);
+	//g_instructions->length -= 2;
 }
 
 void 		case_2(t_stack *stack)
@@ -28,6 +29,7 @@ void 		case_2(t_stack *stack)
 	sa(stack);
 	rra(stack);
 	sa(stack);
+	//g_instructions->length -= 2;
 }
 
 void		case_3(t_stack *stack)
@@ -40,4 +42,5 @@ void		case_4(t_stack *stack)
 	ra(stack);
 	sa(stack);
 	rra(stack);
+	//g_instructions->length -= 2;
 }
