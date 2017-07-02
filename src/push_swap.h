@@ -6,6 +6,7 @@
 #define PUSH_SWAP_PUSH_SWAP_H
 
 #include "../externals/libft/libft.h"
+#include "../externals/get_next_line/get_next_line.h"
 #include <stdio.h>
 #include <stdlib.h>
 # include <limits.h>
@@ -50,6 +51,7 @@ t_instructions	*g_instructions;
 ** parsing.c
 */
 t_stack *parse_parameters(int len, char **argv);
+void	find_duplicates(t_stack *stack, int num);
 /*
 ** stack_operations.c
 */

@@ -104,8 +104,6 @@ t_elem *create_element(int value)
 
 void 	push(t_stack *stack, t_elem *elem)
 {
-	t_elem *temp;
-
 	if (stack->x == NULL)
 	{
 		stack->x = elem;

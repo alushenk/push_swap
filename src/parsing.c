@@ -9,7 +9,7 @@
 */
 int	err_atoi(const char *str)
 {
-	size_t	result;
+	ssize_t	result;
 	int	sign;
 
 	result = 0;
