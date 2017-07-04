@@ -68,6 +68,11 @@ void	perform(t_stack *a, t_stack *b, char *command)
 	}
 }
 
+int 	is_sorted(t_stack *stack, int *arr)
+{
+
+}
+
 int main(int argc, char **argv)
 {
 	int stop;
@@ -96,10 +101,6 @@ int main(int argc, char **argv)
 			push_back(stack, elem);
 			i++;
 		}
-
-		//sleep(10);
-//		char temp[100];
-//		scanf("%s", temp);
 
 		display_stack(stack);
 		ft_putchar('\n');

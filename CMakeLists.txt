@@ -16,7 +16,7 @@ project(checker)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(checker
-        checker_files/main.c
+        src/checker.c
         externals/get_next_line/get_next_line.c
         src/wrappers.c
         src/stack_operations.c
