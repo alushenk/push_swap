@@ -60,7 +60,7 @@ int		get_bigger_count(t_stack *a, int median, int length)
 	return result;
 }
 
-void		split_smaller(t_stack *a, t_stack *b, int median, int length)
+void		split_smaller(t_stack *a, t_stack *b, int median)
 {
 	int i;
 	int group_length;
@@ -68,17 +68,16 @@ void		split_smaller(t_stack *a, t_stack *b, int median, int length)
 	int smaller_count;
 	int initial_length;
 
-	initial_length = length;
-	smaller_count = get_smaller_count(a, median, length);
+	initial_length = a->x->group_length;
+	smaller_count = get_smaller_count(a, median, initial_length);
 	displacement = 0;
 	group_length = 0;
 	i = 0;
-	while(i < length && group_length < smaller_count)
+	while(i < a->length && group_length < smaller_count)
 	{
 		if (a->x->value < median)
 		{
 			pb(a, b);
-			length -= 1;
 			group_length += 1;
 		}
 		else
@@ -98,7 +97,7 @@ void		split_smaller(t_stack *a, t_stack *b, int median, int length)
 	a->x->group_length = initial_length - group_length;
 }
 
-void		split_bigger(t_stack *a, t_stack *b, int median, int length)
+void		split_bigger(t_stack *a, t_stack *b, int median)
 {
 	int i;
 	int group_length;
@@ -106,17 +105,16 @@ void		split_bigger(t_stack *a, t_stack *b, int median, int length)
 	int bigger_count;
 	int initial_length;
 
-	initial_length = length;
-	bigger_count = get_bigger_count(b, median, length);
+	initial_length = b->x->group_length;
+	bigger_count = get_bigger_count(b, median, initial_length);
 	displacement = 0;
 	group_length = 0;
 	i = 0;
-	while(i < length && group_length < bigger_count)
+	while(i < b->length && group_length < bigger_count)
 	{
 		if (b->x->value > median)
 		{
 			pa(a, b);
-			length -= 1;
 			group_length += 1;
 		}
 		else
@@ -144,6 +142,7 @@ void		replace_group(t_stack *a, t_stack *b, int group_length)
 	while (i < group_length)
 	{
 		pa(a, b);
+		sort_two_ascending(a);
 		i++;
 	}
 	a->x->group_length = group_length;
@@ -168,17 +167,15 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 		}
 
 		median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
-		split_bigger(a, b, median, b->x->group_length);
+		split_bigger(a, b, median);
 
 		//display_both(a, b);
 		//ft_putchar('\n');
 
-		if (a->x->group_length <= 3 && b->length > 0)
-			continue;
 		while (a->x->group_length > 3)
 		{
 			median = sorted_array->array[sorted_array->length - a->length + a->x->group_length / 2];
-			split_smaller(a, b, median, a->x->group_length);
+			split_smaller(a, b, median);
 		}
 	}
 }
