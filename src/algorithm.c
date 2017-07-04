@@ -22,118 +22,6 @@ void		sort_a(t_stack *stack, int length)
 //		sort_three_descending(stack);
 //}
 
-int		get_smaller_count(t_stack *a, int median, int length)
-{
-	int i;
-	int result;
-	t_elem *elem;
-
-	elem = a->x;
-	result = 0;
-	i = 0;
-	while (i < length)
-	{
-		if (elem->value < median)
-			result += 1;
-		elem = elem->down;
-		i ++;
-	}
-	return result;
-}
-
-int		get_bigger_count(t_stack *a, int median, int length)
-{
-	int i;
-	int result;
-	t_elem *elem;
-
-	elem = a->x;
-	result = 0;
-	i = 0;
-	while (i < length)
-	{
-		if (elem->value > median)
-			result += 1;
-		elem = elem->down;
-		i ++;
-	}
-	return result;
-}
-
-void		split_smaller(t_stack *a, t_stack *b, int median)
-{
-	int i;
-	int group_length;
-	int displacement;
-	int smaller_count;
-	int initial_length;
-
-	initial_length = a->x->group_length;
-	smaller_count = get_smaller_count(a, median, initial_length);
-	displacement = 0;
-	group_length = 0;
-	i = 0;
-	while(i < a->length && group_length < smaller_count)
-	{
-		if (a->x->value < median)
-		{
-			pb(a, b);
-			group_length += 1;
-		}
-		else
-		{
-			ra(a);
-			displacement += 1;
-			i++;
-		}
-	}
-	i = 0;
-	while (i < displacement)
-	{
-		rra(a);
-		i++;
-	}
-	b->x->group_length = group_length;
-	a->x->group_length = initial_length - group_length;
-}
-
-void		split_bigger(t_stack *a, t_stack *b, int median)
-{
-	int i;
-	int group_length;
-	int displacement;
-	int bigger_count;
-	int initial_length;
-
-	initial_length = b->x->group_length;
-	bigger_count = get_bigger_count(b, median, initial_length);
-	displacement = 0;
-	group_length = 0;
-	i = 0;
-	while(i < b->length && group_length < bigger_count)
-	{
-		if (b->x->value > median)
-		{
-			pa(a, b);
-			group_length += 1;
-		}
-		else
-		{
-			rb(b);
-			displacement += 1;
-			i++;
-		}
-	}
-	i = 0;
-	while (i < displacement)
-	{
-		rrb(b);
-		i++;
-	}
-	b->x->group_length = initial_length - group_length;
-	a->x->group_length = group_length;
-}
-
 void		replace_group(t_stack *a, t_stack *b, int group_length)
 {
 	int i;
@@ -155,8 +43,6 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 	while (1)
 	{
 		sort_a(a, a->x->group_length);
-		//display_both(a, b);
-		//ft_putchar('\n');
 
 		if (b->x == NULL)
 			break;
@@ -165,13 +51,8 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 			replace_group(a, b, b->x->group_length);
 			continue;
 		}
-
 		median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
 		split_bigger(a, b, median);
-
-		//display_both(a, b);
-		//ft_putchar('\n');
-
 		while (a->x->group_length > 3)
 		{
 			median = sorted_array->array[sorted_array->length - a->length + a->x->group_length / 2];
@@ -199,69 +80,15 @@ int 		is_sorted(t_stack *stack, t_array *sorted_array)
 	return (1);
 }
 
-void		split_smaller_first(t_stack *a, t_stack *b, int median)
-{
-	int i;
-	int group_length;
-	int displacement;
-	int smaller_count;
-	int initial_length;
-
-	initial_length = a->length;
-	smaller_count = get_smaller_count(a, median, initial_length);
-	displacement = 0;
-	group_length = 0;
-	i = 0;
-	while(i < a->length && group_length < smaller_count)
-	{
-		if (a->x->value < median)
-		{
-			pb(a, b);
-			group_length += 1;
-		}
-		else
-		{
-			ra(a);
-			displacement += 1;
-			i++;
-		}
-	}
-	i = 0;
-	if (displacement > a->length / 2)
-	{
-		displacement = a->length - displacement;
-		while (i < displacement)
-		{
-			ra(a);
-			i++;
-		}
-	}
-	else
-		while (i < displacement)
-		{
-			rra(a);
-			i++;
-		}
-	b->x->group_length = group_length;
-	a->x->group_length = initial_length - group_length;
-}
-
-t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
+void	quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
 {
 	int median;
 
-	//display_both(a, b);
-	//ft_putchar('\n');
 	while (a->length > 3 && is_sorted(a, sorted_array) == 0)
 	{
 		median = sorted_array->array[sorted_array->length - a->length / 2];
 		split_smaller_first(a, b, median);
-
-		//display_both(a, b);
-		//ft_putchar('\n');
 	}
 	a->x->group_length = a->length;
 	loop(a, b, sorted_array);
-
-	return NULL;
 }

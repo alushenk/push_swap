@@ -86,7 +86,13 @@ t_array 	*create_array(t_stack *stack);
 /*
 ** algorithm.c
 */
-t_stack		*quicksort(t_stack *stack, t_stack *buffer, t_array *sorted_array);
+void	quicksort(t_stack *a, t_stack *b, t_array *sorted_array);
+/*
+** split_functions.c
+*/
+void		split_smaller_first(t_stack *a, t_stack *b, int median);
+void		split_bigger(t_stack *a, t_stack *b, int median);
+void		split_smaller(t_stack *a, t_stack *b, int median);
 /*
 ** cases.c
 */
