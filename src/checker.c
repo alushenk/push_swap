@@ -1,13 +1,21 @@
-//
-// Created by Anton Lushenko on 6/30/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/04 17:57:19 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/04 17:57:23 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../src/push_swap.h"
+#include "push_swap.h"
 
-int	checker_atoi(const char *str, int *stop)
+int		checker_atoi(const char *str, int *stop)
 {
 	ssize_t	result;
-	int	sign;
+	int		sign;
 
 	result = 0;
 	sign = 1;
@@ -19,9 +27,7 @@ int	checker_atoi(const char *str, int *stop)
 	{
 		result = result * 10 + (*str - '0');
 		if (result * sign > INT_MAX || (result * sign < INT_MIN))
-		{
 			error_wrong_arguments();
-		}
 		str++;
 	}
 	if (*str != '\0' && ft_isdigit(*str) == 0)
@@ -29,17 +35,13 @@ int	checker_atoi(const char *str, int *stop)
 		if (*str == '\n')
 			*stop = 1;
 		else
-		{
 			error_wrong_arguments();
-		}
 	}
 	return (int)result * sign;
 }
 
 void	perform(t_stack *a, t_stack *b, char *command)
 {
-	ft_putstr(command);
-	ft_putchar('\n');
 	if (ft_strcmp(command, "sa") == 0)
 		sa(a);
 	else if (ft_strcmp(command, "sb") == 0)
@@ -63,64 +65,58 @@ void	perform(t_stack *a, t_stack *b, char *command)
 	else if (ft_strcmp(command, "rrr") == 0)
 		rrr(a, b);
 	else
-	{
 		error_wrong_arguments();
+}
+
+void	check_sorted(t_stack *stack, t_stack *sorted_stack)
+{
+	int i;
+
+	i = 0;
+	while (i < stack->length)
+	{
+		if (stack->x->value != sorted_stack->x->value)
+			error_sorting();
+		rr(stack, sorted_stack);
+		i++;
 	}
 }
 
-int 	is_sorted(t_stack *stack, int *arr)
+void	parse_numbers(int argc, char **argv, t_stack *stack)
 {
-
-}
-
-int main(int argc, char **argv)
-{
-	int stop;
-	int num;
-	size_t i;
-	t_stack *stack;
-	t_stack *sorted_stack;
-	t_stack *buffer;
-	t_elem *elem;
-	char *str;
-
-	g_instructions = create_list();
-
-	stack = create_stack();
-	buffer = create_stack();
+	int		i;
+	int		num;
+	int		stop;
+	t_elem	*elem;
 
 	stop = 0;
-	if (argc > 1)
+	i = 1;
+	while (i < argc && stop == 0)
 	{
-		i = 1;
-		while ((int)i < argc && stop == 0)
-		{
-			num = checker_atoi(argv[i], &stop);
-			find_duplicates(stack, num);
-			elem = create_element(num);
-			push_back(stack, elem);
-			i++;
-		}
-
-		display_stack(stack);
-		ft_putchar('\n');
-
-		sorted_stack = insertion_sort(stack);
-		while (get_next_line(0, &str) == 1)
-			perform(stack, buffer, str);
-		i = 0;
-		display_both(stack, sorted_stack);
-		ft_putchar('\n');
-		while (i < sorted_stack->length)
-		{
-			if (stack->x->value != sorted_stack->x->value)
-				error_sorting();
-			rr(stack, sorted_stack);
-			i++;
-		}
-		//display_both(stack, sorted_stack);
-		ft_putstr("OK!\n");
+		num = checker_atoi(argv[i], &stop);
+		find_duplicates(stack, num);
+		elem = create_element(num);
+		push_back(stack, elem);
+		i++;
 	}
-	else
+}
+
+int		main(int argc, char **argv)
+{
+	t_stack	*stack;
+	t_stack	*sorted_stack;
+	t_stack	*buffer;
+	char	*str;
+
+	if (argc < 2)
 		error_no_arguments();
+	g_instructions = create_list();
+	stack = create_stack();
+	buffer = create_stack();
+	parse_numbers(argc, argv, stack);
+	sorted_stack = insertion_sort(stack);
+	while (get_next_line(0, &str) == 1)
+		perform(stack, buffer, str);
+	check_sorted(stack, sorted_stack);
+	ft_putstr("OK!\n");
 }
