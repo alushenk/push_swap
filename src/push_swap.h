@@ -13,7 +13,7 @@
 typedef struct	s_elem
 {
 	int value;
-	size_t group_length;
+	int group_length;
 	struct s_elem *up;
 	struct s_elem *down;
 }				t_elem;
@@ -21,13 +21,13 @@ typedef struct	s_elem
 typedef struct	s_stack
 {
 	t_elem *x;
-	size_t length;
+	int length;
 }				t_stack;
 
 typedef struct	s_array
 {
 	int *array;
-	size_t length;
+	int length;
 }				t_array;
 
 typedef struct	s_instruction
@@ -40,7 +40,7 @@ typedef struct	s_instruction
 typedef struct	s_instructions
 {
 	t_instruction *x;
-	size_t length;
+	int length;
 }				t_instructions;
 
 t_instructions	*g_instructions;

@@ -189,16 +189,34 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 	}
 }
 
+int 		is_sorted(t_stack *stack, t_array *sorted_array)
+{
+	t_elem *elem;
+	int start_index;
+	int i;
+
+	start_index = sorted_array->length - stack->length;
+	elem = stack->x;
+	i = 0;
+	while (i < stack->length)
+	{
+		if (elem->value != sorted_array->array[start_index + i])
+			return (0);
+		elem = elem->down;
+		i++;
+	}
+	return (1);
+}
+
 t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
 {
 	int median;
 
 	//display_both(a, b);
 	//ft_putchar('\n');
-	while (a->length > 3)
+	while (a->length > 3 && is_sorted(a, sorted_array) == 0)
 	{
 		median = sorted_array->array[sorted_array->length - a->length / 2];
-		// тут проверку на то отсортирован список или нет. если да - континьэ
 		split_smaller(a, b, median, a->length);
 
 		//display_both(a, b);

@@ -31,11 +31,12 @@ int main(int argc, char **argv)
 
 		//display_both(stack, buffer);
 		//ft_putchar('\n');
-		//ft_putnbr(g_instructions->length);
-		//ft_putchar('\n');
-		//ft_putchar('\n');
 
 		display_instructions(g_instructions);
+
+		ft_putchar('\n');
+		ft_putnbr(g_instructions->length);
+		ft_putchar('\n');
 	}
 	else
 		error_no_arguments();
