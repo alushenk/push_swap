@@ -21,19 +21,16 @@ int	err_atoi(const char *str)
 	while (ft_isdigit(*str))
 	{
 		result = result * 10 + (*str - '0');
-		if (result > INT_MAX || (result > -INT_MIN && sign == -1))
+		if (result * sign > INT_MAX || (result * sign < INT_MIN))
 		{
-			ft_putstr("push_swap atoi \n");
 			error_wrong_arguments();
 		}
 		str++;
 	}
 	if (*str != '\0' && ft_isdigit(*str) == 0)
 	{
-		ft_putstr("push_swap atoi \n");
 		error_wrong_arguments();
 	}
-
 	return (int)result * sign;
 }
 

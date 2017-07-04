@@ -18,9 +18,8 @@ int	checker_atoi(const char *str, int *stop)
 	while (ft_isdigit(*str))
 	{
 		result = result * 10 + (*str - '0');
-		if (result > INT_MAX || (result > -INT_MIN && sign == -1))
+		if (result * sign > INT_MAX || (result * sign < INT_MIN))
 		{
-			ft_putstr("checker atoi function \n");
 			error_wrong_arguments();
 		}
 		str++;
@@ -31,7 +30,6 @@ int	checker_atoi(const char *str, int *stop)
 			*stop = 1;
 		else
 		{
-			ft_putstr("checker atoi function \n");
 			error_wrong_arguments();
 		}
 	}
