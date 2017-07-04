@@ -28,8 +28,7 @@ void	display_instructions(t_instructions *stack)
 	while (i < stack->length)
 	{
 		ft_putstr(elem->name);
-		if (i + 1 != stack->length)
-			ft_putchar('\n');
+		ft_putchar('\n');
 		elem = elem->next;
 		i++;
 	}

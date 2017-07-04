@@ -123,7 +123,7 @@ void		split_bigger(t_stack *a, t_stack *b, int median, int length)
 		}
 		else
 		{
-			ra(b);
+			rb(b);
 			displacement += 1;
 			i++;
 		}
@@ -131,7 +131,7 @@ void		split_bigger(t_stack *a, t_stack *b, int median, int length)
 	i = 0;
 	while (i < displacement)
 	{
-		rra(b);
+		rrb(b);
 		i++;
 	}
 	b->x->group_length = initial_length - group_length;
@@ -145,10 +145,10 @@ void		replace_group(t_stack *a, t_stack *b, int group_length)
 	i = 0;
 	while (i < group_length)
 	{
-		pb(a, b);
+		pa(a, b);
 		i++;
 	}
-	b->x->group_length = group_length;
+	a->x->group_length = group_length;
 }
 
 void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
@@ -165,7 +165,7 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 			break;
 		if (b->x->group_length <= 3)
 		{
-			replace_group(b, a, b->x->group_length);
+			replace_group(a, b, b->x->group_length);
 			continue;
 		}
 
@@ -193,10 +193,14 @@ t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
 {
 	int median;
 
+	//display_both(a, b);
+	//ft_putchar('\n');
 	while (a->length > 3)
 	{
 		median = sorted_array->array[sorted_array->length - a->length / 2];
+		// тут проверку на то отсортирован список или нет. если да - континьэ
 		split_smaller(a, b, median, a->length);
+
 		//display_both(a, b);
 		//ft_putchar('\n');
 	}

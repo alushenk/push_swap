@@ -6,8 +6,10 @@ int main(int argc, char **argv)
 	t_stack *buffer;
 	t_stack *sorted_stack;
 	t_array *sorted_array;
+	t_instructions *instructions;
 
 	g_instructions = create_list();
+	instructions = g_instructions;
 
 	if (argc > 1)
 	{

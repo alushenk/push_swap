@@ -40,6 +40,8 @@ int	checker_atoi(const char *str, int *stop)
 
 void	perform(t_stack *a, t_stack *b, char *command)
 {
+	ft_putstr(command);
+	ft_putchar('\n');
 	if (ft_strcmp(command, "sa") == 0)
 		sa(a);
 	else if (ft_strcmp(command, "sb") == 0)
@@ -64,8 +66,6 @@ void	perform(t_stack *a, t_stack *b, char *command)
 		rrr(a, b);
 	else
 	{
-		//ft_putstr(command);
-		ft_putstr("suka");
 		error_wrong_arguments();
 	}
 }
@@ -98,12 +98,20 @@ int main(int argc, char **argv)
 			push_back(stack, elem);
 			i++;
 		}
+
+		//sleep(10);
+//		char temp[100];
+//		scanf("%s", temp);
+
 		display_stack(stack);
+		ft_putchar('\n');
+
 		sorted_stack = insertion_sort(stack);
 		while (get_next_line(0, &str) == 1)
 			perform(stack, buffer, str);
 		i = 0;
 		display_both(stack, sorted_stack);
+		ft_putchar('\n');
 		while (i < sorted_stack->length)
 		{
 			if (stack->x->value != sorted_stack->x->value)
@@ -111,7 +119,7 @@ int main(int argc, char **argv)
 			rr(stack, sorted_stack);
 			i++;
 		}
-		display_both(stack, sorted_stack);
+		//display_both(stack, sorted_stack);
 		ft_putstr("OK!\n");
 	}
 	else
