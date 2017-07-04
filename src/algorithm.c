@@ -73,7 +73,6 @@ void		split_smaller(t_stack *a, t_stack *b, int median, int length)
 	displacement = 0;
 	group_length = 0;
 	i = 0;
-	// scrolls entire list, can be optimised
 	while(i < length && group_length < smaller_count)
 	{
 		if (a->x->value < median)
@@ -112,7 +111,6 @@ void		split_bigger(t_stack *a, t_stack *b, int median, int length)
 	displacement = 0;
 	group_length = 0;
 	i = 0;
-	// scrolls entire list, can be optimised
 	while(i < length && group_length < bigger_count)
 	{
 		if (b->x->value > median)
@@ -177,14 +175,10 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 
 		if (a->x->group_length <= 3 && b->length > 0)
 			continue;
-		else
+		while (a->x->group_length > 3)
 		{
-			while (a->x->group_length > 3)
-			{
-				median = sorted_array->array[sorted_array->length - a->length + a->x->group_length / 2];
-				split_smaller(a, b, median, a->x->group_length);
-			}
-			continue;
+			median = sorted_array->array[sorted_array->length - a->length + a->x->group_length / 2];
+			split_smaller(a, b, median, a->x->group_length);
 		}
 	}
 }
@@ -208,6 +202,53 @@ int 		is_sorted(t_stack *stack, t_array *sorted_array)
 	return (1);
 }
 
+void		split_smaller_first(t_stack *a, t_stack *b, int median)
+{
+	int i;
+	int group_length;
+	int displacement;
+	int smaller_count;
+	int initial_length;
+
+	initial_length = a->length;
+	smaller_count = get_smaller_count(a, median, initial_length);
+	displacement = 0;
+	group_length = 0;
+	i = 0;
+	while(i < a->length && group_length < smaller_count)
+	{
+		if (a->x->value < median)
+		{
+			pb(a, b);
+			group_length += 1;
+		}
+		else
+		{
+			ra(a);
+			displacement += 1;
+			i++;
+		}
+	}
+	i = 0;
+	if (displacement > a->length / 2)
+	{
+		displacement = a->length - displacement;
+		while (i < displacement)
+		{
+			ra(a);
+			i++;
+		}
+	}
+	else
+		while (i < displacement)
+		{
+			rra(a);
+			i++;
+		}
+	b->x->group_length = group_length;
+	a->x->group_length = initial_length - group_length;
+}
+
 t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
 {
 	int median;
@@ -217,7 +258,7 @@ t_stack		*quicksort(t_stack *a, t_stack *b, t_array *sorted_array)
 	while (a->length > 3 && is_sorted(a, sorted_array) == 0)
 	{
 		median = sorted_array->array[sorted_array->length - a->length / 2];
-		split_smaller(a, b, median, a->length);
+		split_smaller_first(a, b, median);
 
 		//display_both(a, b);
 		//ft_putchar('\n');
