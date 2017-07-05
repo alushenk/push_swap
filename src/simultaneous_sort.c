@@ -115,7 +115,7 @@ void 	simultaneous_sort(t_stack *a, t_stack *b)
 
 		instruction = a_list->x;
 		i = 0;
-		while (i < a->length)
+		while (i < a_list->length)
 		{
 			add_instruction(g_instructions, instruction->name);
 			instruction = instruction->next;
