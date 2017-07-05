@@ -86,7 +86,10 @@ t_array 	*create_array(t_stack *stack);
 /*
 ** algorithm.c
 */
-void	quicksort(t_stack *a, t_stack *b, t_array *sorted_array);
+void		quicksort(t_stack *a, t_stack *b, t_array *sorted_array);
+void		sort_a(t_stack *stack, int length);
+void 		sort_b(t_stack *stack, int length);
+void		replace_group(t_stack *a, t_stack *b, int group_length);
 /*
 ** split_functions.c
 */
@@ -111,9 +114,6 @@ void		sort_three_descending(t_stack *stack);
 /*
 ** wrappers.c
 */
-t_instructions	*create_list();
-t_instruction	*create_instruction(char *name);
-void			add_instruction(char *name);
 void sa(t_stack *stack);
 void sb(t_stack *stack);
 void ss(t_stack *a, t_stack *b);
@@ -125,5 +125,15 @@ void rr(t_stack *a, t_stack *b);
 void rra(t_stack *stack);
 void rrb(t_stack *stack);
 void rrr(t_stack *a, t_stack *b);
+/*
+** simultaneous_sort.c
+*/
+void 	simultaneous_sort(t_stack *a, t_stack *b);
+/*
+** instructions.c
+*/
+t_instructions	*create_list();
+t_instruction	*create_instruction(char *name);
+void			add_instruction(char *name);
 
 #endif //PUSH_SWAP_PUSH_SWAP_H

@@ -63,14 +63,14 @@ void		sort_three_descending(t_stack *stack)
 	b = stack->x->down->value;
 	c = stack->x->down->down->value;
 
-	if (a < b < c)
+	if (a < b && b < c)
 		case_0(stack);
-	else if (a < c < b)
+	else if (a < c && c < b)
 		case_1(stack);
-	else if (b < a < c)
+	else if (b < a && a < c)
 		case_2(stack);
-	else if (c < a < b)
+	else if (c < a && a < b)
 		case_3(stack);
-	else if (b < c < a)
+	else if (b < c && c < a)
 		case_4(stack);
 }

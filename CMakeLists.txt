@@ -15,6 +15,8 @@ add_executable(push_swap
         src/three_two_sortings.c
         src/wrappers.c
         src/split_functions.c
+        src/simultaneous_sort.c
+        src/instructions.c
         )
 
 file(GLOB SOURCES_LIB externals/get_next_line/libft/*.c)

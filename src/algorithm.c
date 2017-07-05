@@ -14,13 +14,13 @@ void		sort_a(t_stack *stack, int length)
 }
 
 // sorting in descending order
-//void 		sort_b(t_stack *stack, int length)
-//{
-//	if (length == 2)
-//		sort_two_descending(stack);
-//	else if (length == 3)
-//		sort_three_descending(stack);
-//}
+void 		sort_b(t_stack *stack, int length)
+{
+	if (length == 2)
+		sort_two_descending(stack);
+	else if (length == 3)
+		sort_three_descending(stack);
+}
 
 void		replace_group(t_stack *a, t_stack *b, int group_length)
 {
@@ -36,14 +36,36 @@ void		replace_group(t_stack *a, t_stack *b, int group_length)
 	a->x->group_length = group_length;
 }
 
+int		is_sorted_group(t_stack *stack, t_array *sorted_array, int group_length, int a_length)
+{
+	t_elem	*elem;
+	int		start_index;
+
+	elem = stack->x;
+	start_index = sorted_array->length - a_length - 1;
+	while (group_length > 0)
+	{
+		if (elem->value != sorted_array->array[start_index])
+			return (0);
+		elem = elem->down;
+		start_index--;
+		group_length--;
+	}
+	return (1);
+}
+
+
+
 void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 {
 	int median;
 
 	while (1)
 	{
-		sort_a(a, a->x->group_length);
+		if (a->x->group_length <= 3 && b->x->group_length <= 3)
+			simultaneous_sort(a, b);
 
+		sort_a(a, a->x->group_length);
 		if (b->x == NULL)
 			break;
 		if (b->x->group_length <= 3)
@@ -51,6 +73,13 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 			replace_group(a, b, b->x->group_length);
 			continue;
 		}
+		// мало пользы. по сути без этого происходит то же самое, только по три.
+		// норм было бы изначально не перемещать в Б отсортированные куски.
+//		if (is_sorted_group(b, sorted_array, b->x->group_length, a->length))
+//		{
+//			replace_group(a, b, b->x->group_length);
+//			continue;
+//		}
 		median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
 		split_bigger(a, b, median);
 		while (a->x->group_length > 3)

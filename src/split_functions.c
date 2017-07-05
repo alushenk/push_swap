@@ -1,14 +1,22 @@
-//
-// Created by Anton Lushenko on 7/4/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_functions.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/05 12:07:15 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/05 12:07:17 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
 int		get_smaller_count(t_stack *a, int median, int length)
 {
-	int i;
-	int result;
-	t_elem *elem;
+	int		i;
+	int		result;
+	t_elem	*elem;
 
 	elem = a->x;
 	result = 0;
@@ -18,16 +26,16 @@ int		get_smaller_count(t_stack *a, int median, int length)
 		if (elem->value < median)
 			result += 1;
 		elem = elem->down;
-		i ++;
+		i++;
 	}
-	return result;
+	return (result);
 }
 
 int		get_bigger_count(t_stack *a, int median, int length)
 {
-	int i;
-	int result;
-	t_elem *elem;
+	int		i;
+	int		result;
+	t_elem	*elem;
 
 	elem = a->x;
 	result = 0;
@@ -37,25 +45,28 @@ int		get_bigger_count(t_stack *a, int median, int length)
 		if (elem->value > median)
 			result += 1;
 		elem = elem->down;
-		i ++;
+		i++;
 	}
-	return result;
+	return (result);
 }
 
-void		split_smaller_first(t_stack *a, t_stack *b, int median)
+void	split(t_stack *a, t_stack *b, void func(t_stack *a, t_stack *b))
 {
-	int i;
-	int group_length;
-	int displacement;
-	int smaller_count;
-	int initial_length;
+
+}
+
+void	split_smaller_first(t_stack *a, t_stack *b, int median)
+{
+	int	group_length;
+	int	displacement;
+	int	smaller_count;
+	int	initial_length;
 
 	initial_length = a->length;
 	smaller_count = get_smaller_count(a, median, initial_length);
 	displacement = 0;
 	group_length = 0;
-	i = 0;
-	while(i < a->length && group_length < smaller_count)
+	while (displacement < a->length && group_length < smaller_count)
 	{
 		if (a->x->value < median)
 		{
@@ -65,44 +76,40 @@ void		split_smaller_first(t_stack *a, t_stack *b, int median)
 		else
 		{
 			ra(a);
-			displacement += 1;
-			i++;
+			displacement++;
 		}
 	}
-	i = 0;
 	if (displacement > a->length / 2)
 	{
 		displacement = a->length - displacement;
-		while (i < displacement)
+		while (displacement > 0)
 		{
 			ra(a);
-			i++;
+			displacement--;
 		}
 	}
 	else
-		while (i < displacement)
+		while (displacement > 0)
 		{
 			rra(a);
-			i++;
+			displacement--;
 		}
 	b->x->group_length = group_length;
 	a->x->group_length = initial_length - group_length;
 }
 
-void		split_bigger(t_stack *a, t_stack *b, int median)
+void	split_bigger(t_stack *a, t_stack *b, int median)
 {
-	int i;
-	int group_length;
-	int displacement;
-	int bigger_count;
-	int initial_length;
+	int	group_length;
+	int	displacement;
+	int	bigger_count;
+	int	initial_length;
 
 	initial_length = b->x->group_length;
 	bigger_count = get_bigger_count(b, median, initial_length);
 	displacement = 0;
 	group_length = 0;
-	i = 0;
-	while(i < b->length && group_length < bigger_count)
+	while (displacement < b->length && group_length < bigger_count)
 	{
 		if (b->x->value > median)
 		{
@@ -112,34 +119,30 @@ void		split_bigger(t_stack *a, t_stack *b, int median)
 		else
 		{
 			rb(b);
-			displacement += 1;
-			i++;
+			displacement++;
 		}
 	}
-	i = 0;
-	while (i < displacement)
+	while (displacement > 0)
 	{
 		rrb(b);
-		i++;
+		displacement--;
 	}
 	b->x->group_length = initial_length - group_length;
 	a->x->group_length = group_length;
 }
 
-void		split_smaller(t_stack *a, t_stack *b, int median)
+void	split_smaller(t_stack *a, t_stack *b, int median)
 {
-	int i;
-	int group_length;
-	int displacement;
-	int smaller_count;
-	int initial_length;
+	int	group_length;
+	int	displacement;
+	int	smaller_count;
+	int	initial_length;
 
 	initial_length = a->x->group_length;
 	smaller_count = get_smaller_count(a, median, initial_length);
 	displacement = 0;
 	group_length = 0;
-	i = 0;
-	while(i < a->length && group_length < smaller_count)
+	while (displacement < a->length && group_length < smaller_count)
 	{
 		if (a->x->value < median)
 		{
@@ -149,15 +152,13 @@ void		split_smaller(t_stack *a, t_stack *b, int median)
 		else
 		{
 			ra(a);
-			displacement += 1;
-			i++;
+			displacement++;
 		}
 	}
-	i = 0;
-	while (i < displacement)
+	while (displacement > 0)
 	{
 		rra(a);
-		i++;
+		displacement--;
 	}
 	b->x->group_length = group_length;
 	a->x->group_length = initial_length - group_length;
