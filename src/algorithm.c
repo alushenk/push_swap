@@ -36,6 +36,13 @@ void		replace_group(t_stack *a, t_stack *b, int group_length)
 	a->x->group_length = group_length;
 }
 
+// мало пользы. по сути без этого происходит то же самое, только по три.
+// норм было бы изначально не перемещать в Б отсортированные куски.
+//		if (is_sorted_group(b, sorted_array, b->x->group_length, a->length))
+//		{
+//			replace_group(a, b, b->x->group_length);
+//			continue;
+//		}
 int		is_sorted_group(t_stack *stack, t_array *sorted_array, int group_length, int a_length)
 {
 	t_elem	*elem;
@@ -60,10 +67,19 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 {
 	int median;
 
-	while (1)
+	while (b->x != NULL)
 	{
+		//display_instructions(g_instructions);
+		//ft_putchar('\n');
+
 		if (a->x->group_length <= 3 && b->x->group_length <= 3)
 			simultaneous_sort(a, b);
+
+		//display_instructions(g_instructions);
+		//ft_putchar('\n');
+
+		//display_both(a, b);
+		//ft_putchar('\n');
 
 		sort_a(a, a->x->group_length);
 		if (b->x == NULL)
@@ -73,13 +89,7 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 			replace_group(a, b, b->x->group_length);
 			continue;
 		}
-		// мало пользы. по сути без этого происходит то же самое, только по три.
-		// норм было бы изначально не перемещать в Б отсортированные куски.
-//		if (is_sorted_group(b, sorted_array, b->x->group_length, a->length))
-//		{
-//			replace_group(a, b, b->x->group_length);
-//			continue;
-//		}
+
 		median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
 		split_bigger(a, b, median);
 		while (a->x->group_length > 3)

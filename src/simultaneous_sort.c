@@ -11,7 +11,6 @@ t_instructions	*get_instructions(int length)
 	int				i;
 
 	result = create_list();
-	result->length = length;
 	g_instructions->length -= length;
 	instruction = g_instructions->x;
 	i = 0;
@@ -21,10 +20,14 @@ t_instructions	*get_instructions(int length)
 		i++;
 	}
 	instruction->prev->next = g_instructions->x;
-	g_instructions->x->prev->next = instruction;
-	instruction->prev = g_instructions->x->prev;
 	g_instructions->x->prev = instruction->prev;
-	result->x = instruction;
+	i = 0;
+	while (i < length)
+	{
+		add_instruction(result, instruction->name);
+		instruction = instruction->next;
+		i++;
+	}
 	return (result);
 }
 
@@ -71,7 +74,7 @@ void	merge_instructions(t_instructions *a, t_instructions *b)
 	i = 0;
 	while (i < a->length)
 	{
-		add_instruction(instruction->name);
+		add_instruction(g_instructions, instruction->name);
 		instruction = instruction->next;
 		i++;
 	}
@@ -92,15 +95,48 @@ void 	simultaneous_sort(t_stack *a, t_stack *b)
 	sort_a(a, a->x->group_length);
 	a_list = get_instructions(g_instructions->length - count);
 
+	//display_instructions(a_list);
+	//ft_putchar('\n');
+
+	//display_instructions(g_instructions);
+	//ft_putchar('\n');
+
 	//count = g_instructions->length;
 	sort_b(b, b->x->group_length);
 	b_list = get_instructions(g_instructions->length - count);
 
-//	if (a_list->length == 0 || b_list->length == 0)
-//		return ;
+	//display_instructions(b_list);
+	//ft_putchar('\n');
+
+	if (b_list->x == NULL)
+	{
+		t_instruction *instruction;
+		int i;
+
+		instruction = a_list->x;
+		i = 0;
+		while (i < a->length)
+		{
+			add_instruction(g_instructions, instruction->name);
+			instruction = instruction->next;
+			i++;
+		}
+		replace_group(a, b, b_group_length);
+		return ;
+	}
+	if (a_list->x == NULL)
+	{
+		replace_group(a, b, b_group_length);
+		return ;
+	}
+
 	if (a_list->length > b_list->length)
 		merge_instructions(a_list, b_list);
 	else
 		merge_instructions(b_list, a_list);
+
+	//display_instructions(g_instructions);
+	//ft_putchar('\n');
+
 	replace_group(a, b, b_group_length);
 }

@@ -42,7 +42,7 @@ int		get_bigger_count(t_stack *a, int median, int length)
 	i = 0;
 	while (i < length)
 	{
-		if (elem->value > median)
+		if (elem->value >= median)
 			result += 1;
 		elem = elem->down;
 		i++;
@@ -111,7 +111,7 @@ void	split_bigger(t_stack *a, t_stack *b, int median)
 	group_length = 0;
 	while (displacement < b->length && group_length < bigger_count)
 	{
-		if (b->x->value > median)
+		if (b->x->value >= median)
 		{
 			pa(a, b);
 			group_length += 1;

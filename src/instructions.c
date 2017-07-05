@@ -15,24 +15,24 @@ t_instruction *create_instruction(char *name)
 	return result;
 }
 
-void	add_instruction(char *name)
+void	add_instruction(t_instructions *list, char *name)
 {
 	t_instruction *instruction;
 
 	instruction = create_instruction(name);
-	if (g_instructions->x == NULL)
+	if (list->x == NULL)
 	{
-		g_instructions->x = instruction;
-		g_instructions->length = 1;
-		g_instructions->x->prev = instruction;
-		g_instructions->x->next = instruction;
+		list->x = instruction;
+		list->length = 1;
+		list->x->prev = instruction;
+		list->x->next = instruction;
 		return ;
 	}
-	instruction->next = g_instructions->x;
-	instruction->prev = g_instructions->x->prev;
-	g_instructions->x->prev->next = instruction;
-	g_instructions->x->prev = instruction;
-	g_instructions->length += 1;
+	instruction->next = list->x;
+	instruction->prev = list->x->prev;
+	list->x->prev->next = instruction;
+	list->x->prev = instruction;
+	list->length += 1;
 }
 
 t_instructions	*create_list()

@@ -36,6 +36,7 @@ add_executable(checker
         src/errors.c src/parsing.c
         src/simple_sorting.c
         src/display.c
+        src/instructions.c
         )
 
 target_link_libraries(checker ft)	        # Линковка программы с библиотекой

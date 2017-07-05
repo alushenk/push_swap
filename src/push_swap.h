@@ -134,6 +134,6 @@ void 	simultaneous_sort(t_stack *a, t_stack *b);
 */
 t_instructions	*create_list();
 t_instruction	*create_instruction(char *name);
-void			add_instruction(char *name);
+void	add_instruction(t_instructions *list, char *name);
 
 #endif //PUSH_SWAP_PUSH_SWAP_H
