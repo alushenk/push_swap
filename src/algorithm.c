@@ -72,14 +72,17 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 		//display_instructions(g_instructions);
 		//ft_putchar('\n');
 
+//		display_both(a, b);
+//		ft_putchar('\n');
+
 		if (a->x->group_length <= 3 && b->x->group_length <= 3)
 			simultaneous_sort(a, b);
 
 		//display_instructions(g_instructions);
 		//ft_putchar('\n');
 
-		//display_both(a, b);
-		//ft_putchar('\n');
+//		display_both(a, b);
+//		ft_putchar('\n');
 
 		sort_a(a, a->x->group_length);
 		if (b->x == NULL)
@@ -89,13 +92,22 @@ void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 			replace_group(a, b, b->x->group_length);
 			continue;
 		}
+//		display_both(a, b);
+//		ft_putchar('\n');
 
 		median = sorted_array->array[sorted_array->length - a->length - b->x->group_length / 2];
 		split_bigger(a, b, median);
+
+//		display_both(a, b);
+//		ft_putchar('\n');
+
 		while (a->x->group_length > 3)
 		{
 			median = sorted_array->array[sorted_array->length - a->length + a->x->group_length / 2];
 			split_smaller(a, b, median);
+
+//			display_both(a, b);
+//			ft_putchar('\n');
 		}
 	}
 }

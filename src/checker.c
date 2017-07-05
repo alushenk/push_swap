@@ -42,7 +42,9 @@ int		checker_atoi(const char *str, int *stop)
 
 void	perform(t_stack *a, t_stack *b, char *command)
 {
-	printf("%s\n", command);
+	//printf("%s\n", command);
+	//display_both(a, b);
+	//ft_putchar('\n');
 	if (ft_strcmp(command, "sa") == 0)
 		sa(a);
 	else if (ft_strcmp(command, "sb") == 0)
