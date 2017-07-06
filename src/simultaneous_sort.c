@@ -154,33 +154,18 @@ void 	simultaneous_sort(t_stack *a, t_stack *b)
 	int b_group_length;
 	t_instructions *a_list;
 	t_instructions *b_list;
-
 	t_instruction *instruction;
 	int i;
 
 	if (a->x->group_length == 0 || b->x->group_length == 0)
 		return ;
 	b_group_length = b->x->group_length;
-
 	count = g_instructions->length;
 	sort_a(a, a->x->group_length);
 	a_list = get_instructions(g_instructions->length - count);
-
-	//display_instructions(a_list);
-	//ft_putchar('\n');
-
-	//display_both(a, b);
-	//ft_putchar('\n');
-
-	//display_instructions(g_instructions);
-	//ft_putchar('\n');
-
-	//count = g_instructions->length;
 	sort_b(b, b->x->group_length);
 	b_list = get_instructions(g_instructions->length - count);
 
-	//display_instructions(b_list);
-	//ft_putchar('\n');
 
 	if (b_list->x == NULL)
 	{
@@ -214,9 +199,6 @@ void 	simultaneous_sort(t_stack *a, t_stack *b)
 		merge_instructions_a(a_list, b_list);
 	else
 		merge_instructions_b(b_list, a_list);
-
-	//display_instructions(g_instructions);
-	//ft_putchar('\n');
 
 	replace_group(a, b, b_group_length);
 }

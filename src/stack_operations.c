@@ -32,7 +32,7 @@ t_elem	*pop(t_stack *stack)
 
 	elem = stack->x;
 	if (stack->length == 0)
-		return NULL;
+		return (NULL);
 	if (stack->length == 1)
 		stack->x = NULL;
 	else
@@ -44,7 +44,7 @@ t_elem	*pop(t_stack *stack)
 	elem->up = NULL;
 	elem->down = NULL;
 	stack->length -= 1;
-	return elem;
+	return (elem);
 }
 
 t_elem	*peek(t_stack *stack)
@@ -52,7 +52,7 @@ t_elem	*peek(t_stack *stack)
 	t_elem *result;
 
 	result = create_element(stack->x->value);
-	return result;
+	return (result);
 }
 
 void	swap(t_stack *stack)
@@ -65,20 +65,20 @@ void	swap(t_stack *stack)
 	rotate_down(stack);
 }
 
-t_stack	*create_stack()
+t_stack	*create_stack(void)
 {
 	t_stack *result;
 
 	result = (t_stack*)malloc(sizeof(t_stack));
 	result->x = NULL;
 	result->length = 0;
-	return result;
+	return (result);
 }
 
 t_stack	*copy_stack(t_stack *stack)
 {
-	t_stack *result;
-	size_t 	i;
+	t_stack	*result;
+	size_t	i;
 
 	result = create_stack();
 	i = 0;
@@ -88,10 +88,10 @@ t_stack	*copy_stack(t_stack *stack)
 		rotate_up(stack);
 		i++;
 	}
-	return result;
+	return (result);
 }
 
-t_elem *create_element(int value)
+t_elem	*create_element(int value)
 {
 	t_elem *result;
 
@@ -100,17 +100,15 @@ t_elem *create_element(int value)
 	result->down = NULL;
 	result->value = value;
 	result->group_length = 0;
-
-	return result;
+	return (result);
 }
 
-void 	push(t_stack *stack, t_elem *elem)
+void	push(t_stack *stack, t_elem *elem)
 {
 	if (stack->x == NULL)
 	{
 		stack->x = elem;
 		stack->length = 1;
-		// self interlock
 		stack->x->up = elem;
 		stack->x->down = elem;
 		return ;
@@ -129,12 +127,9 @@ void	push_back(t_stack *stack, t_elem *elem)
 	rotate_up(stack);
 }
 
-/*
-** replace first element from stack a to stack b
-*/
 void	replace(t_stack *a, t_stack *b)
 {
-	t_elem *elem;
+	t_elem	*elem;
 
 	elem = pop(a);
 	push(b, elem);

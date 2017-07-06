@@ -53,16 +53,16 @@ void	find_duplicates(t_stack *stack, int num);
 /*
 ** stack_operations.c
 */
-void 	push(t_stack *stack, t_elem *elem);
-void	push_back(t_stack *stack, t_elem *elem);
-void	rotate_up(t_stack *stack);
-void	rotate_down(t_stack *stack);
-t_stack	*create_stack();
-t_elem *create_element(int value);
-void	replace(t_stack *a, t_stack *b);
-t_elem	*pop(t_stack *stack);
-t_stack	*copy_stack(t_stack *stack);
-void	swap(t_stack *stack);
+void			push(t_stack *stack, t_elem *elem);
+void			push_back(t_stack *stack, t_elem *elem);
+void			rotate_up(t_stack *stack);
+void			rotate_down(t_stack *stack);
+t_stack			*create_stack();
+t_elem			*create_element(int value);
+void			replace(t_stack *a, t_stack *b);
+t_elem			*pop(t_stack *stack);
+t_stack			*copy_stack(t_stack *stack);
+void			swap(t_stack *stack);
 /*
 ** display.c
 */

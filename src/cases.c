@@ -1,46 +1,50 @@
-//
-// Created by Anton Lushenko on 6/28/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cases.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 17:13:31 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/06 17:22:11 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-void 		case_0(t_stack *stack)
+void	case_0(t_stack *stack)
 {
 	sa(stack);
 	ra(stack);
 	sa(stack);
 	rra(stack);
 	sa(stack);
-	//g_instructions->length -= 2;
 }
 
-void		case_1(t_stack *stack)
+void	case_1(t_stack *stack)
 {
 	sa(stack);
 	ra(stack);
 	sa(stack);
 	rra(stack);
-	//g_instructions->length -= 2;
 }
 
-void 		case_2(t_stack *stack)
+void	case_2(t_stack *stack)
 {
 	ra(stack);
 	sa(stack);
 	rra(stack);
 	sa(stack);
-	//g_instructions->length -= 2;
 }
 
-void		case_3(t_stack *stack)
+void	case_3(t_stack *stack)
 {
 	sa(stack);
 }
 
-void		case_4(t_stack *stack)
+void	case_4(t_stack *stack)
 {
 	ra(stack);
 	sa(stack);
 	rra(stack);
-	//g_instructions->length -= 2;
 }

@@ -1,16 +1,25 @@
-//
-// Created by Anton Lushenko on 6/24/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 17:23:32 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/06 17:23:34 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-** function terminates the program in case of wrong parameters
+**function terminates the program in case of wrong parameters
 */
-int	err_atoi(const char *str)
+
+int		err_atoi(const char *str)
 {
 	ssize_t	result;
-	int	sign;
+	int		sign;
 
 	result = 0;
 	sign = 1;
@@ -37,6 +46,7 @@ int	err_atoi(const char *str)
 /*
 ** Function terminates the program in the case of repeated values
 */
+
 void	find_duplicates(t_stack *stack, int num)
 {
 	size_t i;
@@ -51,15 +61,14 @@ void	find_duplicates(t_stack *stack, int num)
 	}
 }
 
-t_stack *parse_parameters(int len, char **argv)
+t_stack	*parse_parameters(int len, char **argv)
 {
-	int i;
-	int num;
-	t_stack *result;
-	t_elem *elem;
+	int		i;
+	int		num;
+	t_stack	*result;
+	t_elem	*elem;
 
 	result = create_stack();
-
 	i = 1;
 	while (i < len)
 	{
@@ -69,5 +78,5 @@ t_stack *parse_parameters(int len, char **argv)
 		push_back(result, elem);
 		i++;
 	}
-	return result;
+	return (result);
 }
