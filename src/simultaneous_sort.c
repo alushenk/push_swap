@@ -116,7 +116,7 @@ void	merge_instructions_b(t_instructions *a, t_instructions *b)
 		i++;
 	}
 	j = 0;
-	while (i < a->length && strcmp(a->x->name, b->x->name) == 0)
+	while (i < a->length && j < b->length && strcmp(a->x->name, b->x->name) == 0)
 	{
 		rename_command(a->x->name);
 		a->x = a->x->next;

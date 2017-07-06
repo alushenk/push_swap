@@ -30,7 +30,7 @@ void		replace_group(t_stack *a, t_stack *b, int group_length)
 	while (i < group_length)
 	{
 		pa(a, b);
-		sort_two_ascending(a);
+		//sort_two_ascending(a);
 		i++;
 	}
 	a->x->group_length = group_length;
@@ -60,8 +60,6 @@ int		is_sorted_group(t_stack *stack, t_array *sorted_array, int group_length, in
 	}
 	return (1);
 }
-
-
 
 void		loop(t_stack *a, t_stack *b, t_array *sorted_array)
 {

@@ -79,7 +79,11 @@ void	check_sorted(t_stack *stack, t_stack *sorted_stack)
 	while (i < stack->length)
 	{
 		if (stack->x->value != sorted_stack->x->value)
+		{
+			ft_putnbr(stack->x->value);
+			ft_putchar('\n');
 			error_sorting();
+		}
 		rr(stack, sorted_stack);
 		i++;
 	}
@@ -120,6 +124,9 @@ int		main(int argc, char **argv)
 	sorted_stack = insertion_sort(stack);
 	while (get_next_line(0, &str) == 1)
 		perform(stack, buffer, str);
+	display_both(stack, sorted_stack);
+	ft_putnbr(g_instructions->length);
+	ft_putchar('\n');
 	check_sorted(stack, sorted_stack);
 	ft_putstr("OK!\n");
 }
