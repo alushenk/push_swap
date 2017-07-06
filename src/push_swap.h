@@ -94,8 +94,8 @@ void		replace_group(t_stack *a, t_stack *b, int group_length);
 ** split_functions.c
 */
 void		split_smaller_first(t_stack *a, t_stack *b, int median);
-void		split_bigger(t_stack *a, t_stack *b, int median);
-void		split_smaller(t_stack *a, t_stack *b, int median);
+void		split_bigger(t_stack *a, t_stack *b, int median, int initial_length);
+void		split_smaller(t_stack *a, t_stack *b, int median, int initial_length);
 /*
 ** cases.c
 */

@@ -61,12 +61,12 @@ void	loop(t_stack *a, t_stack *b, t_array *sorted)
 		}
 		index = sorted->length - a->length - b->x->group_length / 2;
 		median = sorted->array[index];
-		split_bigger(a, b, median);
+		split_bigger(a, b, median, b->x->group_length);
 		while (a->x->group_length > 3)
 		{
 			index = sorted->length - a->length + a->x->group_length / 2;
 			median = sorted->array[index];
-			split_smaller(a, b, median);
+			split_smaller(a, b, median, a->x->group_length);
 		}
 	}
 }
