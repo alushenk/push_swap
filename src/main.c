@@ -29,10 +29,6 @@ int main(int argc, char **argv)
 		buffer = create_stack();
 		quicksort(stack, buffer, sorted_array);
 		display_instructions(g_instructions);
-
-//		ft_putchar('\n');
-//		ft_putnbr(g_instructions->length);
-//		ft_putchar('\n');
 	}
 	else
 		error_no_arguments();

@@ -1,53 +1,28 @@
-//
-// Created by Anton Lushenko on 7/5/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simultaneous_sort.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 18:08:32 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/06 18:08:33 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_instructions	*get_instructions(int length)
-{
-	t_instructions	*result;
-	t_instruction	*instruction;
-	int				i;
-
-	result = create_list();
-	g_instructions->length -= length;
-	instruction = g_instructions->x;
-	i = 0;
-	while (i < length)
-	{
-		instruction = instruction->prev;
-		i++;
-	}
-	instruction->prev->next = g_instructions->x;
-	g_instructions->x->prev = instruction->prev;
-	i = 0;
-	while (i < length)
-	{
-		add_instruction(result, instruction->name);
-		instruction = instruction->next;
-		i++;
-	}
-	return (result);
-}
-
-void	rename_command(char *name)
+void			rename_command(char *name)
 {
 	if (ft_strcmp(name, "sa") == 0)
 		name[1] = 's';
-	else if (ft_strcmp(name, "sb") == 0)
-		name[1] = 's';
 	else if (ft_strcmp(name, "ra") == 0)
-		name[1] = 'r';
-	else if (ft_strcmp(name, "rb") == 0)
 		name[1] = 'r';
 	else if (ft_strcmp(name, "rra") == 0)
 		name[2] = 'r';
-	else if (ft_strcmp(name, "rrb") == 0)
-		name[2] = 'r';
 }
 
-void	rename_command_b(char *name)
+void			rename_command_b(char *name)
 {
 	if (ft_strcmp(name, "sa") == 0)
 		name[1] = 'b';
@@ -57,11 +32,11 @@ void	rename_command_b(char *name)
 		name[2] = 'b';
 }
 
-void	merge_instructions_a(t_instructions *a, t_instructions *b)
+void			merge_instructions_a(t_instructions *a, t_instructions *b)
 {
-	int i;
-	int j;
-	t_instruction *instruction;
+	int				i;
+	int				j;
+	t_instruction	*instruction;
 
 	i = 0;
 	while (i < a->length && strcmp(a->x->name, b->x->name))
@@ -91,7 +66,6 @@ void	merge_instructions_a(t_instructions *a, t_instructions *b)
 		instruction = instruction->next;
 		j++;
 	}
-
 	instruction = a->x;
 	i = 0;
 	while (i < a->length)
@@ -102,11 +76,11 @@ void	merge_instructions_a(t_instructions *a, t_instructions *b)
 	}
 }
 
-void	merge_instructions_b(t_instructions *a, t_instructions *b)
+void			merge_instructions_b(t_instructions *a, t_instructions *b)
 {
-	int i;
-	int j;
-	t_instruction *instruction;
+	int				i;
+	int				j;
+	t_instruction	*instruction;
 
 	i = 0;
 	while (i < a->length && strcmp(a->x->name, b->x->name))
@@ -137,7 +111,6 @@ void	merge_instructions_b(t_instructions *a, t_instructions *b)
 		instruction = instruction->next;
 		j++;
 	}
-
 	instruction = a->x;
 	i = 0;
 	while (i < a->length)
@@ -148,14 +121,70 @@ void	merge_instructions_b(t_instructions *a, t_instructions *b)
 	}
 }
 
-void 	simultaneous_sort(t_stack *a, t_stack *b)
+void			insert_list_a(t_instructions *instructions)
 {
-	int	count;
-	int b_group_length;
-	t_instructions *a_list;
-	t_instructions *b_list;
-	t_instruction *instruction;
-	int i;
+	t_instruction	*instruction;
+	int				i;
+
+	instruction = instructions->x;
+	i = 0;
+	while (i < instructions->length)
+	{
+		add_instruction(g_instructions, instruction->name);
+		instruction = instruction->next;
+		i++;
+	}
+}
+
+void			insert_list_b(t_instructions *instructions)
+{
+	t_instruction	*instruction;
+	int				i;
+
+	instruction = instructions->x;
+	i = 0;
+	while (i < instructions->length)
+	{
+		rename_command_b(instruction->name);
+		add_instruction(g_instructions, instruction->name);
+		instruction = instruction->next;
+		i++;
+	}
+}
+
+t_instructions	*get_instructions(int length)
+{
+	t_instructions	*result;
+	t_instruction	*instruction;
+	int				i;
+
+	result = create_list();
+	g_instructions->length -= length;
+	instruction = g_instructions->x;
+	i = 0;
+	while (i < length)
+	{
+		instruction = instruction->prev;
+		i++;
+	}
+	instruction->prev->next = g_instructions->x;
+	g_instructions->x->prev = instruction->prev;
+	i = 0;
+	while (i < length)
+	{
+		add_instruction(result, instruction->name);
+		instruction = instruction->next;
+		i++;
+	}
+	return (result);
+}
+
+void			simultaneous_sort(t_stack *a, t_stack *b)
+{
+	int				count;
+	int				b_group_length;
+	t_instructions	*a_list;
+	t_instructions	*b_list;
 
 	if (a->x->group_length == 0 || b->x->group_length == 0)
 		return ;
@@ -165,40 +194,13 @@ void 	simultaneous_sort(t_stack *a, t_stack *b)
 	a_list = get_instructions(g_instructions->length - count);
 	sort_b(b, b->x->group_length);
 	b_list = get_instructions(g_instructions->length - count);
-
-
 	if (b_list->x == NULL)
-	{
-		instruction = a_list->x;
-		i = 0;
-		while (i < a_list->length)
-		{
-			add_instruction(g_instructions, instruction->name);
-			instruction = instruction->next;
-			i++;
-		}
-		replace_group(a, b, b_group_length);
-		return ;
-	}
-	if (a_list->x == NULL)
-	{
-		instruction = b_list->x;
-		i = 0;
-		while (i < b_list->length)
-		{
-			rename_command_b(instruction->name);
-			add_instruction(g_instructions, instruction->name);
-			instruction = instruction->next;
-			i++;
-		}
-		replace_group(a, b, b_group_length);
-		return ;
-	}
-
-	if (a_list->length > b_list->length)
+		insert_list_a(a_list);
+	else if (a_list->x == NULL)
+		insert_list_b(b_list);
+	else if (a_list->length > b_list->length)
 		merge_instructions_a(a_list, b_list);
 	else
 		merge_instructions_b(b_list, a_list);
-
 	replace_group(a, b, b_group_length);
 }
