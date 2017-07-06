@@ -1,31 +1,39 @@
-//
-// Created by Anton Lushenko on 6/24/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple_sorting.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 17:38:14 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/06 17:38:15 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-int find_min(t_stack *stack)
+int		find_min(t_stack *stack)
 {
-	int result;
-	size_t i;
+	int		result;
+	size_t	i;
 
 	i = 0;
 	result = stack->x->value;
-	while(i < stack->length)
+	while (i < stack->length)
 	{
 		if (stack->x->value < result)
 			result = stack->x->value;
 		rotate_up(stack);
 		i++;
 	}
-	return result;
+	return (result);
 }
 
-t_array 	*create_array(t_stack *stack)
+t_array	*create_array(t_stack *stack)
 {
-	t_array *result;
-	int *array;
-	size_t i;
+	t_array	*result;
+	int		*array;
+	size_t	i;
 
 	result = (t_array*)malloc(sizeof(t_array));
 	array = (int*)malloc(sizeof(int) * stack->length);
@@ -38,34 +46,33 @@ t_array 	*create_array(t_stack *stack)
 	}
 	result->array = array;
 	result->length = stack->length;
-	return result;
+	return (result);
 }
 
-t_stack		*insertion_sort(t_stack *stack_to_sort)
+t_stack	*insertion_sort(t_stack *stack_to_sort)
 {
-	size_t i;
-	t_stack *sorted_stack;
-	t_stack *stack;
+	size_t	i;
+	t_stack	*sorted;
+	t_stack	*stack;
 
 	stack = copy_stack(stack_to_sort);
-	sorted_stack = create_stack();
-	replace(stack, sorted_stack);
-	while(stack->length > 0)
+	sorted = create_stack();
+	replace(stack, sorted);
+	while (stack->length > 0)
 	{
 		i = 0;
-		while (stack->x->value > sorted_stack->x->value && i < sorted_stack->length)
+		while (stack->x->value > sorted->x->value && i < sorted->length)
 		{
-			rotate_up(sorted_stack);
+			rotate_up(sorted);
 			i++;
 		}
-		// spin list to start position
-		replace(stack, sorted_stack);
-		while (i < sorted_stack->length)
+		replace(stack, sorted);
+		while (i < sorted->length)
 		{
-			rotate_up(sorted_stack);
+			rotate_up(sorted);
 			i++;
 		}
 	}
 	free(stack);
-	return sorted_stack;
+	return (sorted);
 }

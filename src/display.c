@@ -1,6 +1,14 @@
-//
-// Created by Anton Lushenko on 6/24/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 17:29:50 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/06 17:29:53 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -20,8 +28,8 @@ void	display_stack(t_stack *stack)
 
 void	display_instructions(t_instructions *stack)
 {
-	size_t i;
-	t_instruction *elem;
+	size_t			i;
+	t_instruction	*elem;
 
 	elem = stack->x;
 	i = 0;

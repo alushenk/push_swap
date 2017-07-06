@@ -1,10 +1,18 @@
-//
-// Created by Anton Lushenko on 7/5/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 17:36:22 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/06 17:36:23 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_instruction *create_instruction(char *name)
+t_instruction	*create_instruction(char *name)
 {
 	t_instruction *result;
 
@@ -12,10 +20,10 @@ t_instruction *create_instruction(char *name)
 	result->name = ft_strdup(name);
 	result->next = NULL;
 	result->prev = NULL;
-	return result;
+	return (result);
 }
 
-void	add_instruction(t_instructions *list, char *name)
+void			add_instruction(t_instructions *list, char *name)
 {
 	t_instruction *instruction;
 
@@ -35,13 +43,12 @@ void	add_instruction(t_instructions *list, char *name)
 	list->length += 1;
 }
 
-t_instructions	*create_list()
+t_instructions	*create_list(void)
 {
 	t_instructions *result;
 
 	result = (t_instructions*)malloc(sizeof(t_instructions));
 	result->x = NULL;
 	result->length = 0;
-
-	return result;
+	return (result);
 }
