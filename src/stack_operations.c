@@ -1,6 +1,14 @@
-//
-// Created by Anton Lushenko on 6/24/17.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/06 17:02:14 by alushenk          #+#    #+#             */
+/*   Updated: 2017/07/06 17:02:16 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -47,12 +55,6 @@ t_elem	*peek(t_stack *stack)
 	return result;
 }
 
-/*
-** swaps first two elements of stack
- *
- * it uses the rotate functions twice, for simplicity,
- * that must be considered as one operation
-*/
 void	swap(t_stack *stack)
 {
 	t_elem *elem;
