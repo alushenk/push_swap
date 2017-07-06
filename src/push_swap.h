@@ -142,5 +142,7 @@ void				simultaneous_sort(t_stack *a, t_stack *b);
 t_inst_lst			*create_list();
 t_inst				*create_instruction(char *name);
 void				add_instruction(t_inst_lst *list, char *name);
+void				free_list(t_inst_lst *list);
+void				insert_instruction(t_inst_lst *list, t_inst *instruction);
 
 #endif

@@ -150,6 +150,7 @@ t_inst_lst	*get_instructions(int length)
 {
 	t_inst_lst	*result;
 	t_inst		*instruction;
+	t_inst		*temp;
 	int			i;
 
 	result = create_list();
@@ -166,8 +167,9 @@ t_inst_lst	*get_instructions(int length)
 	i = 0;
 	while (i < length)
 	{
-		add_instruction(result, instruction->name);
+		temp = instruction;
 		instruction = instruction->next;
+		insert_instruction(result, temp);
 		i++;
 	}
 	return (result);
@@ -197,4 +199,6 @@ void		simultaneous_sort(t_stack *a, t_stack *b)
 	else
 		merge_instructions_b(b_list, a_list);
 	replace_group(a, b, b_group_length);
+	free_list(a_list);
+	free_list(b_list);
 }
