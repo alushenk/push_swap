@@ -26,10 +26,10 @@ void	display_stack(t_stack *stack)
 	}
 }
 
-void	display_instructions(t_instructions *stack)
+void	display_instructions(t_inst_lst *stack)
 {
-	size_t			i;
-	t_instruction	*elem;
+	size_t	i;
+	t_inst	*elem;
 
 	elem = stack->x;
 	i = 0;

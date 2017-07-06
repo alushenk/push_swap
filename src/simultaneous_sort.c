@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void			rename_command(char *name)
+void		rename_command(char *name)
 {
 	if (ft_strcmp(name, "sa") == 0)
 		name[1] = 's';
@@ -22,7 +22,7 @@ void			rename_command(char *name)
 		name[2] = 'r';
 }
 
-void			rename_command_b(char *name)
+void		rename_command_b(char *name)
 {
 	if (ft_strcmp(name, "sa") == 0)
 		name[1] = 'b';
@@ -32,43 +32,14 @@ void			rename_command_b(char *name)
 		name[2] = 'b';
 }
 
-void			merge_instructions_a(t_instructions *a, t_instructions *b)
+void		insert_result(t_inst_lst *list)
 {
-	int				i;
-	int				j;
-	t_instruction	*instruction;
+	t_inst	*instruction;
+	int		i;
 
+	instruction = list->x;
 	i = 0;
-	while (i < a->length && strcmp(a->x->name, b->x->name))
-	{
-		a->x = a->x->next;
-		i++;
-	}
-	j = 0;
-	while (i < a->length && j < b->length && strcmp(a->x->name, b->x->name) == 0)
-	{
-		rename_command(a->x->name);
-		a->x = a->x->next;
-		b->x = b->x->next;
-		j++;
-		i++;
-	}
-	while (i < a->length)
-	{
-		a->x = a->x->next;
-		i++;
-	}
-	instruction = b->x;
-	while (j < b->length)
-	{
-		rename_command_b(instruction->name);
-		add_instruction(a, instruction->name);
-		instruction = instruction->next;
-		j++;
-	}
-	instruction = a->x;
-	i = 0;
-	while (i < a->length)
+	while (i < list->length)
 	{
 		add_instruction(g_instructions, instruction->name);
 		instruction = instruction->next;
@@ -76,11 +47,50 @@ void			merge_instructions_a(t_instructions *a, t_instructions *b)
 	}
 }
 
-void			merge_instructions_b(t_instructions *a, t_instructions *b)
+void		merge(t_inst_lst *a, t_inst_lst *b, int *i, int *j)
 {
-	int				i;
-	int				j;
-	t_instruction	*instruction;
+	*j = 0;
+	while (*i < a->length && *j < b->length && !strcmp(a->x->name, b->x->name))
+	{
+		rename_command(a->x->name);
+		a->x = a->x->next;
+		b->x = b->x->next;
+		(*j)++;
+		(*i)++;
+	}
+}
+
+void		merge_instructions_a(t_inst_lst *a, t_inst_lst *b)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < a->length && strcmp(a->x->name, b->x->name))
+	{
+		a->x = a->x->next;
+		i++;
+	}
+	merge(a, b, &i, &j);
+	while (i < a->length)
+	{
+		a->x = a->x->next;
+		i++;
+	}
+	while (j < b->length)
+	{
+		rename_command_b(b->x->name);
+		add_instruction(a, b->x->name);
+		b->x = b->x->next;
+		j++;
+	}
+	insert_result(a);
+}
+
+void		merge_instructions_b(t_inst_lst *a, t_inst_lst *b)
+{
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < a->length && strcmp(a->x->name, b->x->name))
@@ -89,42 +99,26 @@ void			merge_instructions_b(t_instructions *a, t_instructions *b)
 		a->x = a->x->next;
 		i++;
 	}
-	j = 0;
-	while (i < a->length && j < b->length && strcmp(a->x->name, b->x->name) == 0)
-	{
-		rename_command(a->x->name);
-		a->x = a->x->next;
-		b->x = b->x->next;
-		j++;
-		i++;
-	}
+	merge(a, b, &i, &j);
 	while (i < a->length)
 	{
 		rename_command_b(a->x->name);
 		a->x = a->x->next;
 		i++;
 	}
-	instruction = b->x;
 	while (j < b->length)
 	{
-		add_instruction(a, instruction->name);
-		instruction = instruction->next;
+		add_instruction(a, b->x->name);
+		b->x = b->x->next;
 		j++;
 	}
-	instruction = a->x;
-	i = 0;
-	while (i < a->length)
-	{
-		add_instruction(g_instructions, instruction->name);
-		instruction = instruction->next;
-		i++;
-	}
+	insert_result(a);
 }
 
-void			insert_list_a(t_instructions *instructions)
+void		insert_list_a(t_inst_lst *instructions)
 {
-	t_instruction	*instruction;
-	int				i;
+	t_inst	*instruction;
+	int		i;
 
 	instruction = instructions->x;
 	i = 0;
@@ -136,10 +130,10 @@ void			insert_list_a(t_instructions *instructions)
 	}
 }
 
-void			insert_list_b(t_instructions *instructions)
+void		insert_list_b(t_inst_lst *instructions)
 {
-	t_instruction	*instruction;
-	int				i;
+	t_inst	*instruction;
+	int		i;
 
 	instruction = instructions->x;
 	i = 0;
@@ -152,11 +146,11 @@ void			insert_list_b(t_instructions *instructions)
 	}
 }
 
-t_instructions	*get_instructions(int length)
+t_inst_lst	*get_instructions(int length)
 {
-	t_instructions	*result;
-	t_instruction	*instruction;
-	int				i;
+	t_inst_lst	*result;
+	t_inst		*instruction;
+	int			i;
 
 	result = create_list();
 	g_instructions->length -= length;
@@ -179,12 +173,12 @@ t_instructions	*get_instructions(int length)
 	return (result);
 }
 
-void			simultaneous_sort(t_stack *a, t_stack *b)
+void		simultaneous_sort(t_stack *a, t_stack *b)
 {
-	int				count;
-	int				b_group_length;
-	t_instructions	*a_list;
-	t_instructions	*b_list;
+	int			count;
+	int			b_group_length;
+	t_inst_lst	*a_list;
+	t_inst_lst	*b_list;
 
 	if (a->x->group_length == 0 || b->x->group_length == 0)
 		return ;

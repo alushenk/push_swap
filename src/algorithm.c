@@ -61,12 +61,12 @@ void	loop(t_stack *a, t_stack *b, t_array *sorted)
 		}
 		index = sorted->length - a->length - b->x->group_length / 2;
 		median = sorted->array[index];
-		split_bigger(a, b, median, b->x->group_length);
+		split_b(a, b, median, b->x->group_length);
 		while (a->x->group_length > 3)
 		{
 			index = sorted->length - a->length + a->x->group_length / 2;
 			median = sorted->array[index];
-			split_smaller(a, b, median, a->x->group_length);
+			split_a(a, b, median, a->x->group_length);
 		}
 	}
 }
@@ -97,7 +97,7 @@ void	quicksort(t_stack *a, t_stack *b, t_array *sorted)
 	while (a->length > 3 && is_sorted(a, sorted) == 0)
 	{
 		median = sorted->array[sorted->length - a->length / 2];
-		split_smaller_first(a, b, median);
+		split_a_first(a, b, median);
 	}
 	a->x->group_length = a->length;
 	loop(a, b, sorted);

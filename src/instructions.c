@@ -12,20 +12,20 @@
 
 #include "push_swap.h"
 
-t_instruction	*create_instruction(char *name)
+t_inst		*create_instruction(char *name)
 {
-	t_instruction *result;
+	t_inst *result;
 
-	result = (t_instruction*)malloc(sizeof(t_instruction));
+	result = (t_inst*)malloc(sizeof(t_inst));
 	result->name = ft_strdup(name);
 	result->next = NULL;
 	result->prev = NULL;
 	return (result);
 }
 
-void			add_instruction(t_instructions *list, char *name)
+void		add_instruction(t_inst_lst *list, char *name)
 {
-	t_instruction *instruction;
+	t_inst *instruction;
 
 	instruction = create_instruction(name);
 	if (list->x == NULL)
@@ -43,11 +43,11 @@ void			add_instruction(t_instructions *list, char *name)
 	list->length += 1;
 }
 
-t_instructions	*create_list(void)
+t_inst_lst	*create_list(void)
 {
-	t_instructions *result;
+	t_inst_lst *result;
 
-	result = (t_instructions*)malloc(sizeof(t_instructions));
+	result = (t_inst_lst*)malloc(sizeof(t_inst_lst));
 	result->x = NULL;
 	result->length = 0;
 	return (result);

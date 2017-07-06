@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack *stack;
 	t_stack *buffer;
@@ -32,5 +32,5 @@ int main(int argc, char **argv)
 	}
 	else
 		error_no_arguments();
-	return 0;
+	return (0);
 }

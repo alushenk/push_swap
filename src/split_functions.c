@@ -50,14 +50,14 @@ int		get_bigger_count(t_stack *a, int median, int length)
 	return (result);
 }
 
-void	split_smaller_first(t_stack *a, t_stack *b, int median)
+void	split_a_first(t_stack *a, t_stack *b, int median)
 {
 	int	group_length;
 	int	smaller_count;
-	int	initial_length;
+	int	init_len;
 
-	initial_length = a->length;
-	smaller_count = get_smaller_count(a, median, initial_length);
+	init_len = a->length;
+	smaller_count = get_smaller_count(a, median, init_len);
 	group_length = 0;
 	while (group_length < smaller_count)
 	{
@@ -70,18 +70,18 @@ void	split_smaller_first(t_stack *a, t_stack *b, int median)
 			ra(a);
 	}
 	b->x->group_length = group_length;
-	a->x->group_length = initial_length - group_length;
+	a->x->group_length = init_len - group_length;
 }
 
-void	split_bigger(t_stack *a, t_stack *b, int median, int initial_length)
+void	split_b(t_stack *a, t_stack *b, int median, int init_len)
 {
 	int	group_length;
 	int	displacement;
 	int	bigger_count;
 	int need_replace;
 
-	need_replace = (initial_length == b->length) ? 0 : 1;
-	bigger_count = get_bigger_count(b, median, initial_length);
+	need_replace = (init_len == b->length) ? 0 : 1;
+	bigger_count = get_bigger_count(b, median, init_len);
 	displacement = 0;
 	group_length = 0;
 	while (group_length < bigger_count)
@@ -97,17 +97,17 @@ void	split_bigger(t_stack *a, t_stack *b, int median, int initial_length)
 	}
 	while (--displacement >= 0 && need_replace)
 		rrb(b);
-	b->x->group_length = initial_length - group_length;
+	b->x->group_length = init_len - group_length;
 	a->x->group_length = group_length;
 }
 
-void	split_smaller(t_stack *a, t_stack *b, int median, int initial_length)
+void	split_a(t_stack *a, t_stack *b, int median, int init_len)
 {
 	int	group_length;
 	int	displacement;
 	int	smaller_count;
 
-	smaller_count = get_smaller_count(a, median, initial_length);
+	smaller_count = get_smaller_count(a, median, init_len);
 	displacement = 0;
 	group_length = 0;
 	while (group_length < smaller_count)
@@ -124,5 +124,5 @@ void	split_smaller(t_stack *a, t_stack *b, int median, int initial_length)
 	while (--displacement >= 0)
 		rra(a);
 	b->x->group_length = group_length;
-	a->x->group_length = initial_length - group_length;
+	a->x->group_length = init_len - group_length;
 }
