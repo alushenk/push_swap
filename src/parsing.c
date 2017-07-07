@@ -49,7 +49,7 @@ int		err_atoi(const char *str)
 
 void	find_duplicates(t_stack *stack, int num)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < stack->length)

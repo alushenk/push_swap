@@ -34,7 +34,7 @@ int		is_sorted(t_stack *stack, t_array *sorted)
 int		find_min(t_stack *stack)
 {
 	int		result;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	result = stack->x->value;
@@ -52,7 +52,7 @@ t_array	*create_array(t_stack *stack)
 {
 	t_array	*result;
 	int		*array;
-	size_t	i;
+	int		i;
 
 	result = (t_array*)malloc(sizeof(t_array));
 	array = (int*)malloc(sizeof(int) * stack->length);
@@ -70,7 +70,7 @@ t_array	*create_array(t_stack *stack)
 
 t_stack	*insertion_sort(t_stack *stack_to_sort)
 {
-	size_t	i;
+	int		i;
 	t_stack	*sorted;
 	t_stack	*stack;
 

@@ -14,7 +14,7 @@
 
 void	display_stack(t_stack *stack)
 {
-	size_t i;
+	int i;
 
 	i = 0;
 	while (i < stack->length)
@@ -28,7 +28,7 @@ void	display_stack(t_stack *stack)
 
 void	display_instructions(t_inst_lst *stack)
 {
-	size_t	i;
+	int		i;
 	t_inst	*elem;
 
 	elem = stack->x;
@@ -44,7 +44,7 @@ void	display_instructions(t_inst_lst *stack)
 
 void	display_array(t_array *array)
 {
-	size_t i;
+	int	i;
 
 	i = 0;
 	while (i < array->length)
@@ -57,7 +57,7 @@ void	display_array(t_array *array)
 
 void	display_both(t_stack *a, t_stack *b)
 {
-	size_t i;
+	int	i;
 
 	i = 0;
 	while (i < a->length || i < b->length)

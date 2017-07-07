@@ -39,7 +39,11 @@ add_executable(checker
         src/checker.c
         externals/get_next_line/get_next_line.c
         src/stack_operations/stack_operations.c
-        src/errors.c src/parsing.c
+        src/stack_operations/create_functions.c
+        src/stack_operations/push_functions.c
+        src/stack_operations/rotate_functions.c
+        src/errors.c
+        src/parsing.c
         src/simple_sorting.c
         src/display.c
         src/instructions.c

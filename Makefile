@@ -1,42 +1,72 @@
-NAME = checker
+PUSH_SWAP = push_swap
 
-SRCDIR = src
+CHECKER = checker
 
 GNLDIR = externals/get_next_line
 
-CHECKER_DIR = checker_files
+SRCDIR = src
 
-SRC =   wrappers.c \
-        stack_operations.c \
-        errors.c \
-        parsing.c \
-        simple_sorting.c \
-        display.c
+SRC_CHECKER =	checker.c \
+        		errors.c \
+        		parsing.c \
+        		simple_sorting.c \
+        		display.c \
+        		instructions.c \
+        		wrappers/wrappers.c \
+        		wrappers/wrappers_a.c \
+        		wrappers/wrappers_b.c \
+        		stack_operations/stack_operations.c \
+        		stack_operations/create_functions.c \
+        		stack_operations/push_functions.c \
+        		stack_operations/rotate_functions.c
+
+SRC_PUSH_SWAP = algorithm.c \
+        		cases.c \
+        		display.c \
+        		errors.c \
+        		main.c \
+        		parsing.c \
+        		simple_sorting.c \
+        		three_two_sortings.c \
+        		split_functions.c \
+        		instructions.c \
+        		simultaneous_sort/simultaneous_sort.c \
+        		simultaneous_sort/merge_functions.c \
+        		simultaneous_sort/rename_functions.c \
+        		wrappers/wrappers.c \
+        		wrappers/wrappers_a.c \
+        		wrappers/wrappers_b.c \
+        		stack_operations/stack_operations.c \
+        		stack_operations/create_functions.c \
+        		stack_operations/push_functions.c \
+        		stack_operations/rotate_functions.c
 
 GNL =	get_next_line.c
 
-CHECKER = main.c
+OBJ_CHECKER = $(addprefix $(SRCDIR)/, $(SRC_CHECKER:.c=.o)) $(addprefix $(GNLDIR)/, $(GNL:.c=.o))
 
-OBJ = $(addprefix $(SRCDIR)/, $(SRC:.c=.o)) $(addprefix $(GNLDIR)/, $(GNL:.c=.o)) $(addprefix $(CHECKER_DIR)/, $(CHECKER:.c=.o))
+OBJ_PUSH_SWAP = $(addprefix $(SRCDIR)/, $(SRC_PUSH_SWAP:.c=.o))
 
 LIB_PATH = $(GNLDIR)/libft
 
-all: $(NAME)
-
-$(NAME): $(OBJ)
+all: $(OBJ_CHECKER) $(OBJ_PUSH_SWAP)
 	make -C $(LIB_PATH)
-	gcc -g -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(LIB_PATH)/libft.a
+	gcc -g -Wall -Wextra -Werror -o $(CHECKER) $(OBJ_CHECKER) $(LIB_PATH)/libft.a
+	gcc -g -Wall -Wextra -Werror -o $(PUSH_SWAP) $(OBJ_PUSH_SWAP) $(LIB_PATH)/libft.a
 
 %.o: %.c
 	gcc -c -Wall -Wextra -Werror -o $@ $<
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ_CHECKER)
+	rm -f $(OBJ_PUSH_SWAP)
 	make clean -C $(LIB_PATH)
 
 fclean:
-	rm -f $(NAME)
-	rm -f $(OBJ)
+	rm -f $(CHECKER)
+	rm -f $(PUSH_SWAP)
+	rm -f $(OBJ_CHECKER)
+	rm -f $(OBJ_PUSH_SWAP)
 	make fclean -C $(LIB_PATH)
 
 re: fclean all

@@ -54,7 +54,7 @@ void	swap(t_stack *stack)
 t_stack	*copy_stack(t_stack *stack)
 {
 	t_stack	*result;
-	size_t	i;
+	int		i;
 
 	result = create_stack();
 	i = 0;
