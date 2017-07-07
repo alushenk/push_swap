@@ -6,114 +6,11 @@
 /*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 18:08:32 by alushenk          #+#    #+#             */
-/*   Updated: 2017/07/06 18:08:33 by alushenk         ###   ########.fr       */
+/*   Updated: 2017/07/07 15:45:10 by alushenk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void		rename_command(char *name)
-{
-	if (ft_strcmp(name, "sa") == 0)
-		name[1] = 's';
-	else if (ft_strcmp(name, "ra") == 0)
-		name[1] = 'r';
-	else if (ft_strcmp(name, "rra") == 0)
-		name[2] = 'r';
-}
-
-void		rename_command_b(char *name)
-{
-	if (ft_strcmp(name, "sa") == 0)
-		name[1] = 'b';
-	else if (ft_strcmp(name, "ra") == 0)
-		name[1] = 'b';
-	else if (ft_strcmp(name, "rra") == 0)
-		name[2] = 'b';
-}
-
-void		insert_result(t_inst_lst *list)
-{
-	t_inst	*instruction;
-	int		i;
-
-	instruction = list->x;
-	i = 0;
-	while (i < list->length)
-	{
-		add_instruction(g_instructions, instruction->name);
-		instruction = instruction->next;
-		i++;
-	}
-}
-
-void		merge(t_inst_lst *a, t_inst_lst *b, int *i, int *j)
-{
-	*j = 0;
-	while (*i < a->length && *j < b->length && !strcmp(a->x->name, b->x->name))
-	{
-		rename_command(a->x->name);
-		a->x = a->x->next;
-		b->x = b->x->next;
-		(*j)++;
-		(*i)++;
-	}
-}
-
-void		merge_instructions_a(t_inst_lst *a, t_inst_lst *b)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < a->length && strcmp(a->x->name, b->x->name))
-	{
-		a->x = a->x->next;
-		i++;
-	}
-	merge(a, b, &i, &j);
-	while (i < a->length)
-	{
-		a->x = a->x->next;
-		i++;
-	}
-	while (j < b->length)
-	{
-		rename_command_b(b->x->name);
-		add_instruction(a, b->x->name);
-		b->x = b->x->next;
-		j++;
-	}
-	insert_result(a);
-}
-
-void		merge_instructions_b(t_inst_lst *a, t_inst_lst *b)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < a->length && strcmp(a->x->name, b->x->name))
-	{
-		rename_command_b(a->x->name);
-		a->x = a->x->next;
-		i++;
-	}
-	merge(a, b, &i, &j);
-	while (i < a->length)
-	{
-		rename_command_b(a->x->name);
-		a->x = a->x->next;
-		i++;
-	}
-	while (j < b->length)
-	{
-		add_instruction(a, b->x->name);
-		b->x = b->x->next;
-		j++;
-	}
-	insert_result(a);
-}
+#include "../push_swap.h"
 
 void		insert_list_a(t_inst_lst *instructions)
 {

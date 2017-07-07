@@ -10,21 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	rotate_up(t_stack *stack)
-{
-	if (stack->length == 0)
-		return ;
-	stack->x = stack->x->down;
-}
-
-void	rotate_down(t_stack *stack)
-{
-	if (stack->length == 0)
-		return ;
-	stack->x = stack->x->up;
-}
+#include "../push_swap.h"
 
 t_elem	*pop(t_stack *stack)
 {
@@ -65,16 +51,6 @@ void	swap(t_stack *stack)
 	rotate_down(stack);
 }
 
-t_stack	*create_stack(void)
-{
-	t_stack *result;
-
-	result = (t_stack*)malloc(sizeof(t_stack));
-	result->x = NULL;
-	result->length = 0;
-	return (result);
-}
-
 t_stack	*copy_stack(t_stack *stack)
 {
 	t_stack	*result;
@@ -89,42 +65,6 @@ t_stack	*copy_stack(t_stack *stack)
 		i++;
 	}
 	return (result);
-}
-
-t_elem	*create_element(int value)
-{
-	t_elem *result;
-
-	result = (t_elem*)malloc(sizeof(t_elem));
-	result->up = NULL;
-	result->down = NULL;
-	result->value = value;
-	result->group_length = 0;
-	return (result);
-}
-
-void	push(t_stack *stack, t_elem *elem)
-{
-	if (stack->x == NULL)
-	{
-		stack->x = elem;
-		stack->length = 1;
-		stack->x->up = elem;
-		stack->x->down = elem;
-		return ;
-	}
-	elem->down = stack->x;
-	elem->up = stack->x->up;
-	stack->x->up->down = elem;
-	stack->x->up = elem;
-	stack->x = elem;
-	stack->length += 1;
-}
-
-void	push_back(t_stack *stack, t_elem *elem)
-{
-	push(stack, elem);
-	rotate_up(stack);
 }
 
 void	replace(t_stack *a, t_stack *b)

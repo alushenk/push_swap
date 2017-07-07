@@ -58,19 +58,6 @@ t_inst_lst			*g_instructions;
 t_stack				*parse_parameters(int len, char **argv);
 void				find_duplicates(t_stack *stack, int num);
 /*
-** stack_operations.c
-*/
-void				push(t_stack *stack, t_elem *elem);
-void				push_back(t_stack *stack, t_elem *elem);
-void				rotate_up(t_stack *stack);
-void				rotate_down(t_stack *stack);
-t_stack				*create_stack();
-t_elem				*create_element(int value);
-void				replace(t_stack *a, t_stack *b);
-t_elem				*pop(t_stack *stack);
-t_stack				*copy_stack(t_stack *stack);
-void				swap(t_stack *stack);
-/*
 ** display.c
 */
 void				display_stack(t_stack *stack);
@@ -90,6 +77,7 @@ void				error_sorting();
 */
 t_stack				*insertion_sort(t_stack *stack_to_sort);
 t_array				*create_array(t_stack *stack);
+int					is_sorted(t_stack *stack, t_array *sorted);
 /*
 ** algorithm.c
 */
@@ -121,21 +109,37 @@ void				sort_three_descending(t_stack *stack);
 /*
 ** wrappers.c
 */
-void				sa(t_stack *stack);
-void				sb(t_stack *stack);
 void				ss(t_stack *a, t_stack *b);
-void				pa(t_stack *a, t_stack *b);
-void				pb(t_stack *a, t_stack *b);
-void				ra(t_stack *stack);
-void				rb(t_stack *stack);
 void				rr(t_stack *a, t_stack *b);
-void				rra(t_stack *stack);
-void				rrb(t_stack *stack);
 void				rrr(t_stack *a, t_stack *b);
 /*
-** simultaneous_sort.c
+** wrappers/wrappers_a.c
+*/
+void				sa(t_stack *stack);
+void				pa(t_stack *a, t_stack *b);
+void				ra(t_stack *stack);
+void				rra(t_stack *stack);
+/*
+** wrappers/wrappers_b.c
+*/
+void				sb(t_stack *stack);
+void				pb(t_stack *a, t_stack *b);
+void				rb(t_stack *stack);
+void				rrb(t_stack *stack);
+/*
+** simultaneous_sort/simultaneous_sort.c
 */
 void				simultaneous_sort(t_stack *a, t_stack *b);
+/*
+** simultaneous_sort/merge_functions.c
+*/
+void				merge_instructions_a(t_inst_lst *a, t_inst_lst *b);
+void				merge_instructions_b(t_inst_lst *a, t_inst_lst *b);
+/*
+** simultaneous_sort/rename_functions.c
+*/
+void				rename_command(char *name);
+void				rename_command_b(char *name);
 /*
 ** instructions.c
 */
@@ -144,5 +148,28 @@ t_inst				*create_instruction(char *name);
 void				add_instruction(t_inst_lst *list, char *name);
 void				free_list(t_inst_lst *list);
 void				insert_instruction(t_inst_lst *list, t_inst *instruction);
+/*
+** stack_operations/stack_operations.c
+*/
+void				replace(t_stack *a, t_stack *b);
+t_elem				*pop(t_stack *stack);
+t_stack				*copy_stack(t_stack *stack);
+void				swap(t_stack *stack);
+void				free_stack(t_stack *stack);
+/*
+** stack_operations/rotate_functions.c
+*/
+void				rotate_up(t_stack *stack);
+void				rotate_down(t_stack *stack);
+/*
+** stack_operations/push_functions.c
+*/
+void				push(t_stack *stack, t_elem *elem);
+void				push_back(t_stack *stack, t_elem *elem);
+/*
+** stack_operations/create_functions.c
+*/
+t_stack				*create_stack();
+t_elem				*create_element(int value);
 
 #endif

@@ -28,19 +28,7 @@ void		add_instruction(t_inst_lst *list, char *name)
 	t_inst *instruction;
 
 	instruction = create_instruction(name);
-	if (list->x == NULL)
-	{
-		list->x = instruction;
-		list->length = 1;
-		list->x->prev = instruction;
-		list->x->next = instruction;
-		return ;
-	}
-	instruction->next = list->x;
-	instruction->prev = list->x->prev;
-	list->x->prev->next = instruction;
-	list->x->prev = instruction;
-	list->length += 1;
+	insert_instruction(list, instruction);
 }
 
 void		insert_instruction(t_inst_lst *list, t_inst *instruction)
@@ -77,13 +65,13 @@ void		free_list(t_inst_lst *list)
 	int		i;
 
 	elem = list->x;
-	temp = elem;
+	i = 0;
 	while (i < list->length)
 	{
-		temp = temp->next;
-		free(elem->name);
-		free(elem);
-		elem = temp;
+		temp = elem;
+		elem = elem->next;
+		free(temp->name);
+		free(temp);
 		i++;
 	}
 	free(list);

@@ -71,25 +71,6 @@ void	loop(t_stack *a, t_stack *b, t_array *sorted)
 	}
 }
 
-int		is_sorted(t_stack *stack, t_array *sorted)
-{
-	t_elem	*elem;
-	int		start_index;
-	int		i;
-
-	start_index = sorted->length - stack->length;
-	elem = stack->x;
-	i = 0;
-	while (i < stack->length)
-	{
-		if (elem->value != sorted->array[start_index + i])
-			return (0);
-		elem = elem->down;
-		i++;
-	}
-	return (1);
-}
-
 void	quicksort(t_stack *a, t_stack *b, t_array *sorted)
 {
 	int median;
