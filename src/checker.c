@@ -121,9 +121,6 @@ int		main(int argc, char **argv)
 	sorted_stack = insertion_sort(stack);
 	while (get_next_line(0, &str) == 1)
 		perform(stack, buffer, str);
-	display_both(stack, sorted_stack);
-	ft_putnbr(g_instructions->length);
-	ft_putchar('\n');
 	check_sorted(stack, sorted_stack);
 	ft_putstr("OK!\n");
 }
