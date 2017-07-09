@@ -68,14 +68,23 @@ t_stack	*parse_parameters(int len, char **argv)
 	t_stack	*result;
 	t_elem	*elem;
 
+	int j;
+	char **strings;
+
 	result = create_stack();
 	i = 1;
 	while (i < len)
 	{
-		num = err_atoi(argv[i]);
-		find_duplicates(result, num);
-		elem = create_element(num);
-		push_back(result, elem);
+		strings = ft_strsplit(argv[i], ' ');
+		j = 0;
+		while (strings[j] != NULL)
+		{
+			num = err_atoi(strings[j]);
+			find_duplicates(result, num);
+			elem = create_element(num);
+			push_back(result, elem);
+			j++;
+		}
 		i++;
 	}
 	return (result);

@@ -93,14 +93,27 @@ void	parse_numbers(int argc, char **argv, t_stack *stack)
 	int		stop;
 	t_elem	*elem;
 
+	char **strings;
+	int j;
+
 	stop = 0;
 	i = 1;
 	while (i < argc && stop == 0)
 	{
-		num = checker_atoi(argv[i], &stop);
-		find_duplicates(stack, num);
-		elem = create_element(num);
-		push_back(stack, elem);
+		strings = ft_strsplit(argv[i], ' ');
+		j = 0;
+		while (strings[j] != NULL)
+		{
+			num = checker_atoi(strings[j], &stop);
+			find_duplicates(stack, num);
+			elem = create_element(num);
+			push_back(stack, elem);
+			j++;
+		}
+//		num = checker_atoi(argv[i], &stop);
+//		find_duplicates(stack, num);
+//		elem = create_element(num);
+//		push_back(stack, elem);
 		i++;
 	}
 }
@@ -111,6 +124,8 @@ int		main(int argc, char **argv)
 	t_stack	*sorted_stack;
 	t_stack	*buffer;
 	char	*str;
+	char	**strings;
+	int 	i;
 
 	if (argc < 2)
 		error_no_arguments();
@@ -120,7 +135,15 @@ int		main(int argc, char **argv)
 	parse_numbers(argc, argv, stack);
 	sorted_stack = insertion_sort(stack);
 	while (get_next_line(0, &str) == 1)
-		perform(stack, buffer, str);
+	{
+		strings = ft_strsplit(str, ' ');
+		i = 0;
+		while (strings[i] != NULL)
+		{
+			perform(stack, buffer, strings[i]);
+			i++;
+		}
+	}
 	check_sorted(stack, sorted_stack);
 	ft_putstr("OK!\n");
 }

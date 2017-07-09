@@ -47,9 +47,9 @@ void	loop(t_stack *a, t_stack *b, t_array *sorted)
 	int median;
 	int index;
 
-	while (b->x != NULL)
+	while (1)
 	{
-		if (a->x->group_length <= 3 && b->x->group_length <= 3)
+		if (b->x != NULL && a->x->group_length <= 3 && b->x->group_length <= 3)
 			simultaneous_sort(a, b);
 		sort_a(a, a->x->group_length);
 		if (b->x == NULL)
