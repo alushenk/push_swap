@@ -12,34 +12,6 @@
 
 #include "push_swap.h"
 
-int		checker_atoi(const char *str, int *stop)
-{
-	ssize_t	result;
-	int		sign;
-
-	result = 0;
-	sign = 1;
-	if (*str == '-')
-		sign = -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (ft_isdigit(*str))
-	{
-		result = result * 10 + (*str - '0');
-		if (result * sign > INT_MAX || (result * sign < INT_MIN))
-			error_wrong_arguments();
-		str++;
-	}
-	if (*str != '\0' && ft_isdigit(*str) == 0)
-	{
-		if (*str == '\n')
-			*stop = 1;
-		else
-			error_wrong_arguments();
-	}
-	return (int)result * sign;
-}
-
 void	perform(t_stack *a, t_stack *b, char *command)
 {
 	if (ft_strcmp(command, "sa") == 0)
@@ -76,46 +48,26 @@ void	check_sorted(t_stack *stack, t_stack *sorted_stack)
 	while (i < stack->length)
 	{
 		if (stack->x->value != sorted_stack->x->value)
-		{
-			ft_putnbr(stack->x->value);
-			ft_putchar('\n');
 			error_sorting();
-		}
 		rr(stack, sorted_stack);
 		i++;
 	}
 }
 
-void	parse_numbers(int argc, char **argv, t_stack *stack)
+void	parse_perform(char *str, t_stack *stack, t_stack *buffer)
 {
-	int		i;
-	int		num;
-	int		stop;
-	t_elem	*elem;
+	char	**strings;
+	int 	i;
 
-	char **strings;
-	int j;
-
-	stop = 0;
-	i = 1;
-	while (i < argc && stop == 0)
+	strings = ft_strsplit(str, ' ');
+	i = 0;
+	while (strings[i] != NULL)
 	{
-		strings = ft_strsplit(argv[i], ' ');
-		j = 0;
-		while (strings[j] != NULL)
-		{
-			num = checker_atoi(strings[j], &stop);
-			find_duplicates(stack, num);
-			elem = create_element(num);
-			push_back(stack, elem);
-			j++;
-		}
-//		num = checker_atoi(argv[i], &stop);
-//		find_duplicates(stack, num);
-//		elem = create_element(num);
-//		push_back(stack, elem);
+		perform(stack, buffer, strings[i]);
+		free(strings[i]);
 		i++;
 	}
+	free(strings);
 }
 
 int		main(int argc, char **argv)
@@ -124,26 +76,15 @@ int		main(int argc, char **argv)
 	t_stack	*sorted_stack;
 	t_stack	*buffer;
 	char	*str;
-	char	**strings;
-	int 	i;
 
 	if (argc < 2)
 		error_no_arguments();
 	g_instructions = create_list();
-	stack = create_stack();
 	buffer = create_stack();
-	parse_numbers(argc, argv, stack);
+	stack = parse_parameters(argc, argv);
 	sorted_stack = insertion_sort(stack);
 	while (get_next_line(0, &str) == 1)
-	{
-		strings = ft_strsplit(str, ' ');
-		i = 0;
-		while (strings[i] != NULL)
-		{
-			perform(stack, buffer, strings[i]);
-			i++;
-		}
-	}
+		parse_perform(str, stack, buffer);
 	check_sorted(stack, sorted_stack);
 	ft_putstr("OK!\n");
 }

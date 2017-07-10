@@ -27,6 +27,14 @@ check_wrong () {
 	fi
 }
 
+check_ko () {
+	if [ "$RESULT" != "KO!" ]; then
+		echo $MESSAGE
+		echo $RESULT
+		echo
+	fi
+}
+
 header
 
 # at first check (by python?) if push_swap && checker exists, if not - check if Makefile exists, if so - make all
@@ -53,34 +61,27 @@ MESSAGE="one element:";
 RESULT="$(./push_swap 1 2 3 a b | ./checker 1 2 3 a b )";
 check_wrong
 
-check_ko () {
-	if [ "$RESULT" != "KO" ]; then
-		echo $MESSAGE
-		echo $RESULT
-		echo
-	fi
-}
-
-# checking for segfaults
 echo "wrong commands to checker, should be KO!:"
 echo "pa" | ./checker 3 2 1;
 python3 -c "print('pa\n' * 10)" | ./checker 3 2 1;
 python3 -c "print('pa\n' * 100)" | ./checker 3 2 1;
 python3 -c "print('pa\n' * 1000)" | ./checker 3 2 1;
 python3 -c "print('pa\n' * 10000)" | ./checker 3 2 1;
+echo
 
-MESSAGE="suka nahuy";
-ARG="-2 -5 -26 -7888 -564 -998 -12";
-check
-
+MESSAGE="different arrays in push_swap and checker. should be KO";
 RESULT="$(./push_swap -2 -5 -26 -7888 -564 -998 -12 | ./checker -2 -5 -26 -7888 -998 -564 -12)";
 check_ko
-
 RESULT="$(./push_swap -5 -4 0 -7888 -564 -1 -12 | ./checker -2 -5 -26 -7888 -998 -564 -12)";
 check_ko
 
+MESSAGE="passing arguments to checker through echo. should be KO";
 RESULT="$(echo "ra ra pb pb pb pb ra sa rra rb pa rb pa sa pa pa" | ./checker -2 -5 -26 -7888 -998 -564 -12)";
 check_ko
+
+MESSAGE="one element:";
+ARG="2";
+check
 
 MESSAGE="two elements sorted:";
 ARG="1 2";

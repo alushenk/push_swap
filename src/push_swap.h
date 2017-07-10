@@ -56,7 +56,6 @@ t_inst_lst			*g_instructions;
 ** parsing.c
 */
 t_stack				*parse_parameters(int len, char **argv);
-void				find_duplicates(t_stack *stack, int num);
 /*
 ** display.c
 */

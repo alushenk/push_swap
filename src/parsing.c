@@ -12,10 +12,6 @@
 
 #include "push_swap.h"
 
-/*
-**function terminates the program in case of wrong parameters
-*/
-
 int		err_atoi(const char *str)
 {
 	ssize_t	result;
@@ -43,10 +39,6 @@ int		err_atoi(const char *str)
 	return (int)result * sign;
 }
 
-/*
-** Function terminates the program in the case of repeated values
-*/
-
 void	find_duplicates(t_stack *stack, int num)
 {
 	int i;
@@ -61,30 +53,38 @@ void	find_duplicates(t_stack *stack, int num)
 	}
 }
 
+void	parse(char *str, t_stack *result)
+{
+	char	**strings;
+	t_elem	*elem;
+	int		num;
+	int		i;
+
+	strings = ft_strsplit(str, ' ');
+	i = 0;
+	while (strings[i] != NULL)
+	{
+		num = err_atoi(strings[i]);
+		free(strings[i]);
+		find_duplicates(result, num);
+		elem = create_element(num);
+		push_back(result, elem);
+		i++;
+	}
+	i = 0;
+	free(strings);
+}
+
 t_stack	*parse_parameters(int len, char **argv)
 {
 	int		i;
-	int		num;
 	t_stack	*result;
-	t_elem	*elem;
-
-	int j;
-	char **strings;
 
 	result = create_stack();
 	i = 1;
 	while (i < len)
 	{
-		strings = ft_strsplit(argv[i], ' ');
-		j = 0;
-		while (strings[j] != NULL)
-		{
-			num = err_atoi(strings[j]);
-			find_duplicates(result, num);
-			elem = create_element(num);
-			push_back(result, elem);
-			j++;
-		}
+		parse(argv[i], result);
 		i++;
 	}
 	return (result);

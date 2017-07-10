@@ -32,5 +32,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		error_no_arguments();
+	while(1);
 	return (0);
 }
