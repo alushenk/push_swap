@@ -55,24 +55,23 @@ void	find_duplicates(t_stack *stack, int num)
 
 void	parse(char *str, t_stack *result)
 {
-	char	**strings;
+	char	*strings;
 	t_elem	*elem;
 	int		num;
 	int		i;
 
-	strings = ft_strsplit(str, ' ');
+
 	i = 0;
-	while (strings[i] != NULL)
+	while ((strings = strsep(&str, " ")))
 	{
-		num = err_atoi(strings[i]);
-		free(strings[i]);
+		num = err_atoi(strings);
+		//free(strings);
 		find_duplicates(result, num);
 		elem = create_element(num);
 		push_back(result, elem);
 		i++;
 	}
-	i = 0;
-	free(strings);
+	//free(strings);
 }
 
 t_stack	*parse_parameters(int len, char **argv)
