@@ -74,10 +74,17 @@ check_wrong
 
 echo "wrong commands to checker, should be KO!:"
 echo "pa" | ./checker 3 2 1;
-python3 -c "print('pa\n' * 10)" | ./checker 3 2 1;
-python3 -c "print('pa\n' * 100)" | ./checker 3 2 1;
-python3 -c "print('pa\n' * 1000)" | ./checker 3 2 1;
-python3 -c "print('pa\n' * 10000)" | ./checker 3 2 1;
+python3 -c "print('pa\n')" | ./checker 3 2 1;
+python3 -c "print('pb\n pb\n pb\n sa\n')" | ./checker 3 2 1;
+python3 -c "print('pb\n sb\n')" | ./checker 3 2 1;
+python3 -c "print('sb\n')" | ./checker 3 2 1;
+python3 -c "print('pb\n pb\n sa\n')" | ./checker 3 2 1;
+python3 -c "print('rrr\n')" | ./checker 3 2 1;
+python3 -c "print('rr\n')" | ./checker 3 2 1;
+python3 -c "print('ss\n')" | ./checker 3 2 1;
+python3 -c "print('pb\n' * 100)" | ./checker 3 2 1;
+python3 -c "print('pb\n' * 1000)" | ./checker 3 2 1;
+python3 -c "print('pb\n' * 10000)" | ./checker 3 2 1;
 echo
 
 MESSAGE="different arrays in push_swap and checker. should be KO";

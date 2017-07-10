@@ -16,26 +16,28 @@ int		err_atoi(const char *str)
 {
 	ssize_t	result;
 	int		sign;
+	int		is_sign;
 
+	is_sign = 0;
 	result = 0;
 	sign = 1;
 	if (*str == '-')
 		sign = -1;
 	if (*str == '-' || *str == '+')
+	{
+		is_sign = 1;
 		str++;
+	}
 	while (ft_isdigit(*str))
 	{
+		is_sign = 0;
 		result = result * 10 + (*str - '0');
 		if (result * sign > INT_MAX || (result * sign < INT_MIN))
-		{
 			error_wrong_arguments();
-		}
 		str++;
 	}
-	if (*str != '\0' && ft_isdigit(*str) == 0)
-	{
+	if ((*str != '\0' && ft_isdigit(*str) == 0) || is_sign)
 		error_wrong_arguments();
-	}
 	return (int)result * sign;
 }
 
