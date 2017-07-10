@@ -91,9 +91,14 @@ RESULT="$(echo "ra ra pb pb pb pb ra sa rra rb pa rb pa sa pa pa" | ./checker -2
 check_ko
 
 MESSAGE="tests for parsing strings with multiple numbers:";
-RESULT="$(./push_swap "5 6 2 9 1 3" | ./checker "5 6 2 9 1 3")";
+
+RESULT="$(./push_swap "5 6 2 9 1 3" | ./checker 5 6 2 9 1 3)";
+check_ok
+RESULT="$(./push_swap 5 6 2 9 1 3 | ./checker "5 6 2 9 1 3")";
 check_ok
 RESULT="$(./push_swap "5 6 2 9 1 3" 8 7 | ./checker "5 6 2 9 1 3" 8 7)";
+check_ok
+RESULT="$(./push_swap "5 6 2 9 1 3" 8 7 | ./checker 5 6 2 9 1 3 "8 7")";
 check_ok
 RESULT="$(./push_swap "5 6" -100 -200 -300 999 | ./checker "5 6" -100 -200 -300 999)";
 check_ok

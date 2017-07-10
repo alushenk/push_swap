@@ -54,20 +54,18 @@ void	check_sorted(t_stack *stack, t_stack *sorted_stack)
 	}
 }
 
-void	parse_perform(char *str, t_stack *stack, t_stack *buffer)
+void	parse_perform(char *arg, t_stack *stack, t_stack *buffer)
 {
-	char	**strings;
-	int 	i;
+	char	*str;
+	char	*temp;
 
-	strings = ft_strsplit(str, ' ');
-	i = 0;
-	while (strings[i] != NULL)
+	temp = arg;
+	while ((str = ft_strsep(&temp, ' ')))
 	{
-		perform(stack, buffer, strings[i]);
-		free(strings[i]);
-		i++;
+		perform(stack, buffer, str);
+		free(str);
 	}
-	free(strings);
+	free(arg);
 }
 
 int		main(int argc, char **argv)

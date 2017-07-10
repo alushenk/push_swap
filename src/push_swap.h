@@ -56,6 +56,7 @@ t_inst_lst			*g_instructions;
 ** parsing.c
 */
 t_stack				*parse_parameters(int len, char **argv);
+char				*ft_strsep(char **str, char sep);
 /*
 ** display.c
 */

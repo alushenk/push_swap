@@ -53,25 +53,37 @@ void	find_duplicates(t_stack *stack, int num)
 	}
 }
 
-void	parse(char *str, t_stack *result)
+char	*ft_strsep(char **str, char sep)
 {
-	char	*strings;
-	t_elem	*elem;
-	int		num;
 	int		i;
-
+	char	*result;
 
 	i = 0;
-	while ((strings = strsep(&str, " ")))
+	while ((*str)[i] != sep && (*str)[i] != '\0')
+		i++;
+	if (i == 0)
+		return (NULL);
+	result = ft_strnew(i);
+	ft_strncpy(result, *str, i);
+	while ((i-- > 0 || **str == sep) && **str != '\0')
+		(*str)++;
+	return (result);
+}
+
+void	parse(char *arg, t_stack *result)
+{
+	char	*str;
+	t_elem	*elem;
+	int		num;
+
+	while ((str = ft_strsep(&arg, ' ')))
 	{
-		num = err_atoi(strings);
-		//free(strings);
+		num = err_atoi(str);
+		free(str);
 		find_duplicates(result, num);
 		elem = create_element(num);
 		push_back(result, elem);
-		i++;
 	}
-	//free(strings);
 }
 
 t_stack	*parse_parameters(int len, char **argv)
