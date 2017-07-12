@@ -87,6 +87,10 @@ python3 -c "print('pb\n' * 1000)" | ./checker 3 2 1;
 python3 -c "print('pb\n' * 10000)" | ./checker 3 2 1;
 echo
 
+MESSAGE="commands as string to checker:";
+RESULT="$(echo "rra pb sa rra pa" | ./checker 3 2 1 0)";
+check_ok
+
 MESSAGE="different arrays in push_swap and checker. should be KO";
 RESULT="$(./push_swap -2 -5 -26 -7888 -564 -998 -12 | ./checker -2 -5 -26 -7888 -998 -564 -12)";
 check_ko
