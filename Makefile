@@ -51,7 +51,7 @@ OBJ_GNL = $(addprefix $(GNLDIR)/, $(GNL:.c=.o))
 
 LIB_PATH = $(GNLDIR)/libft
 
-all: $(OBJ_CHECKER) $(OBJ_PUSH_SWAP)
+all: $(OBJ_CHECKER) $(OBJ_PUSH_SWAP) $(OBJ_GNL)
 	make -C $(LIB_PATH)
 	gcc -g -Wall -Wextra -Werror -o $(CHECKER) $(OBJ_CHECKER) $(OBJ_GNL) $(LIB_PATH)/libft.a
 	gcc -g -Wall -Wextra -Werror -o $(PUSH_SWAP) $(OBJ_PUSH_SWAP) $(OBJ_GNL) $(LIB_PATH)/libft.a
