@@ -43,16 +43,18 @@ SRC_PUSH_SWAP = algorithm.c \
 
 GNL =	get_next_line.c
 
-OBJ_CHECKER = $(addprefix $(SRCDIR)/, $(SRC_CHECKER:.c=.o)) $(addprefix $(GNLDIR)/, $(GNL:.c=.o))
+OBJ_CHECKER = $(addprefix $(SRCDIR)/, $(SRC_CHECKER:.c=.o))
 
 OBJ_PUSH_SWAP = $(addprefix $(SRCDIR)/, $(SRC_PUSH_SWAP:.c=.o))
+
+OBJ_GNL = $(addprefix $(GNLDIR)/, $(GNL:.c=.o))
 
 LIB_PATH = $(GNLDIR)/libft
 
 all: $(OBJ_CHECKER) $(OBJ_PUSH_SWAP)
 	make -C $(LIB_PATH)
-	gcc -g -Wall -Wextra -Werror -o $(CHECKER) $(OBJ_CHECKER) $(LIB_PATH)/libft.a
-	gcc -g -Wall -Wextra -Werror -o $(PUSH_SWAP) $(OBJ_PUSH_SWAP) $(LIB_PATH)/libft.a
+	gcc -g -Wall -Wextra -Werror -o $(CHECKER) $(OBJ_CHECKER) $(OBJ_GNL) $(LIB_PATH)/libft.a
+	gcc -g -Wall -Wextra -Werror -o $(PUSH_SWAP) $(OBJ_PUSH_SWAP) $(OBJ_GNL) $(LIB_PATH)/libft.a
 
 %.o: %.c
 	gcc -c -Wall -Wextra -Werror -o $@ $<

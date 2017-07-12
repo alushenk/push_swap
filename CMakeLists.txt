@@ -4,6 +4,7 @@ project(push_swap)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(push_swap
+        externals/get_next_line/get_next_line.c
         src/algorithm.c
         src/cases.c
         src/display.c

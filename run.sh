@@ -113,6 +113,13 @@ RESULT="$(./push_swap 1 2 3 4 5 6 "-999" "13" "12" | ./checker 1 2 3 4 5 6 "-999
 check_ok
 RESULT="$(./push_swap 1 2 3 4 "5 6 -999" 13 12 | ./checker 1 2 3 4 "5 6 -999" 13 12)";
 check_ok
+RESULT="$(./push_swap "   4 3 2      1" | ./checker "   4 3 2      1")";
+check_ok
+RESULT="$(./push_swap "   " | ./checker "   ")";
+check_wrong
+RESULT="$(./push_swap "   " " " | ./checker "   " " ")";
+check_wrong
+
 
 MESSAGE="one element:";
 ARG="2";
@@ -179,6 +186,52 @@ check
 ARG=$(random_array);
 check
 
+
+MESSAGE="push_swap reading from file:";
+
+COUNT=100;
+random_array > test_file
+ARG="-s test_file";
+check
+rm test_file
+
+COUNT=500;
+random_array > test_file
+ARG="-s test_file";
+check
+rm test_file
+
+COUNT=1;
+random_array > test_file
+ARG="-s test_file";
+check
+rm test_file
+
+COUNT=2;
+random_array > test_file
+ARG="-s test_file";
+check
+rm test_file
+
+COUNT=3;
+random_array > test_file
+ARG="-s test_file";
+check
+rm test_file
+
+echo "asg" > test_file
+RESULT="$(./push_swap test_file | ./checker test_file)";
+check_wrong
+rm test_file
+
+echo "   " > test_file
+RESULT="$(./push_swap test_file | ./checker test_file)";
+check_wrong
+rm test_file
+
+RESULT="$(./push_swap none | ./checker none)";
+check_wrong
+
 MESSAGE="avarage from random 500:";
 COUNT=100;
 ITER=10;
@@ -192,9 +245,6 @@ do
 	RESULT=`expr $RESULT + $(./push_swap $ARG | wc -l)`
 done
 echo `expr $RESULT / $ITER`
-
-
-
 
 MESSAGE="avarage from random 500:";
 COUNT=500;

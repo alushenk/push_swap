@@ -61,6 +61,8 @@ char	*ft_strsep(char **str, char sep)
 	char	*result;
 
 	i = 0;
+	while (**str == sep && **str != '\0')
+		(*str)++;
 	while ((*str)[i] != sep && (*str)[i] != '\0')
 		i++;
 	if (i == 0)
@@ -86,14 +88,30 @@ void	parse(char *arg, t_stack *result)
 		elem = create_element(num);
 		push_back(result, elem);
 	}
+	if (result->x == NULL)
+		error_wrong_arguments();
 }
 
 t_stack	*parse_parameters(int len, char **argv)
 {
 	int		i;
 	t_stack	*result;
+	int		fd;
+	char	*str;
 
 	result = create_stack();
+	if (len == 3 && strcmp(argv[1], "-s") == 0)
+	{
+		if ((fd = open(argv[2], O_RDONLY)) == -1)
+		{
+			ft_putstr("Error opening file!\n");
+			exit(0);
+		}
+		while (get_next_line(fd, &str))
+			parse(str, result);
+		close(fd);
+		return (result);
+	}
 	i = 1;
 	while (i < len)
 	{
