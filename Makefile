@@ -62,6 +62,7 @@ all: $(OBJ_CHECKER) $(OBJ_PUSH_SWAP) $(OBJ_GNL)
 clean:
 	rm -f $(OBJ_CHECKER)
 	rm -f $(OBJ_PUSH_SWAP)
+	rm -f $(OBJ_GNL)
 	make clean -C $(LIB_PATH)
 
 fclean:
@@ -69,6 +70,7 @@ fclean:
 	rm -f $(PUSH_SWAP)
 	rm -f $(OBJ_CHECKER)
 	rm -f $(OBJ_PUSH_SWAP)
+	rm -f $(OBJ_GNL)
 	make fclean -C $(LIB_PATH)
 
 re: fclean all
