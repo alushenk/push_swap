@@ -108,7 +108,10 @@ t_stack	*parse_parameters(int len, char **argv)
 			exit(0);
 		}
 		while (get_next_line(fd, &str))
+		{
 			parse(str, result);
+			free(str);
+		}
 		close(fd);
 		return (result);
 	}

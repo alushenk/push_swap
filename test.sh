@@ -224,12 +224,12 @@ check
 rm test_file
 
 echo "asg" > test_file
-RESULT="$(./push_swap test_file | ./checker test_file)";
+RESULT="$(./push_swap -s test_file | ./checker -s test_file)";
 check_wrong
 rm test_file
 
 echo "   " > test_file
-RESULT="$(./push_swap test_file | ./checker test_file)";
+RESULT="$(./push_swap -s test_file | ./checker -s test_file)";
 check_wrong
 rm test_file
 
