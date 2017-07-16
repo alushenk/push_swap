@@ -154,6 +154,42 @@ check
 ARG="2 1 3";
 check
 
+MESSAGE="random 5:";
+COUNT=5;
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+
+MESSAGE="random 3:";
+COUNT=3;
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+ARG=$(random_array);
+check
+
 MESSAGE="random 100:";
 COUNT=100;
 ARG=$(random_array);
