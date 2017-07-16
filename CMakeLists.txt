@@ -7,6 +7,8 @@ add_executable(push_swap
         externals/get_next_line/get_next_line.c
         src/algorithm.c
         src/cases.c
+        src/short_stack_optimisation.c
+        src/short_cases.c
         src/display.c
         src/errors.c
         src/main.c
@@ -25,7 +27,7 @@ add_executable(push_swap
         src/stack_operations/create_functions.c
         src/stack_operations/push_functions.c
         src/stack_operations/rotate_functions.c
-        )
+        src/short_stack_optimisation.c src/short_cases.c)
 
 file(GLOB SOURCES_LIB externals/get_next_line/libft/*.c)
 add_library(ft STATIC ${SOURCES_LIB})       # Создание статической библиотеки с именем libft

@@ -22,12 +22,14 @@ SRC_CHECKER =	checker.c \
 
 SRC_PUSH_SWAP = algorithm.c \
         		cases.c \
+        		short_cases.c \
         		display.c \
         		errors.c \
         		main.c \
         		parsing.c \
         		simple_sorting.c \
         		three_two_sortings.c \
+        		short_stack_optimisation.c \
         		split_functions.c \
         		instructions.c \
         		simultaneous_sort/simultaneous_sort.c \

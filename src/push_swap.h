@@ -100,12 +100,25 @@ void				case_2(t_stack *stack);
 void				case_3(t_stack *stack);
 void				case_4(t_stack *stack);
 /*
+** short_cases.c
+*/
+void				s_case_0(t_stack *stack);
+void				s_case_1(t_stack *stack);
+void				s_case_2(t_stack *stack);
+void				s_case_3(t_stack *stack);
+void				s_case_4(t_stack *stack);
+/*
 ** three_two_sortings.c
 */
 void				sort_two_ascending(t_stack *stack);
 void				sort_two_descending(t_stack *stack);
 void				sort_three_ascending(t_stack *stack);
 void				sort_three_descending(t_stack *stack);
+/*
+** short_stack_optimisation.c
+*/
+void				sort_short_ascending(t_stack *stack);
+void				sort_short_descending(t_stack *stack);
 /*
 ** wrappers.c
 */
