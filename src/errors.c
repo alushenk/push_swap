@@ -30,9 +30,9 @@ void	error_no_arguments(void)
 	exit(0);
 }
 
-void	error_memory_allocation(void)
+void	error_opening_file(void)
 {
-	ft_putstr("Error! Cannot allocate memory\n");
+	ft_putstr("Error! Cannot open file\n");
 	exit(0);
 }
 

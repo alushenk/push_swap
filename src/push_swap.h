@@ -70,7 +70,7 @@ void				display_both(t_stack *a, t_stack *b);
 void				error_wrong_arguments();
 void				error_duplicates();
 void				error_no_arguments();
-void				error_memory_allocation();
+void				error_opening_file(void);
 void				error_sorting();
 /*
 ** simple_sorting.c

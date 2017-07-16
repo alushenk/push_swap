@@ -103,10 +103,7 @@ t_stack	*parse_parameters(int len, char **argv)
 	if (len == 3 && strcmp(argv[1], "-s") == 0)
 	{
 		if ((fd = open(argv[2], O_RDONLY)) == -1)
-		{
-			ft_putstr("Error opening file!\n");
-			exit(0);
-		}
+			error_opening_file();
 		while (get_next_line(fd, &str))
 		{
 			parse(str, result);
